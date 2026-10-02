@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: cs
+
+collections:
+  - name: "references"
+    label: "Reference"
+    files:
+      - name: "all"
+        label: "Všechny reference"
+        file: "data/references.json"
+        fields:
+          - name: "references"
+            label: "Reference"
+            label_singular: "Referenci"
+            widget: "list"
+            summary: "{{fields.title}} – {{fields.city}} ({{fields.service}})"
+            fields:
+              - { name: "title", label: "Název projektu", widget: "string" }
+              - name: "service"
+                label: "Typ služby"
+                widget: "select"
+                options:
+                  - { label: "KNX / Chytré domy", value: "KNX" }
+                  - { label: "Silnoproud", value: "Silnoproud" }
+                  - { label: "Slaboproud", value: "Slaboproud" }
+                  - { label: "MaR", value: "MaR" }
+              - { name: "type", label: "Typ objektu", widget: "string", hint: "Např.: Rodinný dům, Bytový dům, Komerční objekt, Vila, Průmyslový objekt" }
+              - { name: "date", label: "Datum realizace", widget: "string", hint: "Formát: MM / YYYY (např. 03 / 2025)" }
+              - { name: "city", label: "Město", widget: "string" }
+              - { name: "description", label: "Popis", widget: "text", hint: "Krátký popis projektu (1–2 věty)" }
+              - { name: "image", label: "Fotografie", widget: "image", required: false, allow_multiple: false, hint: "Nepovinné – pokud nezadáte, zobrazí se ikona." }

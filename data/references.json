@@ -1,0 +1,58 @@
+{
+  "references": [
+    {
+      "title": "Novostavba rodinného domu – kompletní KNX",
+      "service": "KNX",
+      "type": "Rodinný dům",
+      "date": "03 / 2025",
+      "city": "Zlín",
+      "description": "Kompletní KNX instalace včetně osvětlení, vytápění, žaluzií a zabezpečení. Ovládání přes mobilní aplikaci.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75"
+    },
+    {
+      "title": "Elektroinstalace bytového domu – 12 jednotek",
+      "service": "Silnoproud",
+      "type": "Bytový dům",
+      "date": "11 / 2024",
+      "city": "Uherské Hradiště",
+      "description": "Silnoproudé rozvody, rozvaděče a kabeláže pro bytový dům s dvanácti bytovými jednotkami a společnými prostory.",
+      "image": "https://images.unsplash.com/photo-1621905251189-08b45249ec90?w=700&q=75"
+    },
+    {
+      "title": "Řídicí systém vzduchotechniky – výrobní hala",
+      "service": "MaR",
+      "type": "Průmyslový objekt",
+      "date": "08 / 2024",
+      "city": "Kroměříž",
+      "description": "Automatizace VZT jednotek, regulace teplot v zónách a vzdálený monitoring provozních parametrů.",
+      "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=75"
+    },
+    {
+      "title": "Datová síť a kamerový systém – administrativní budova",
+      "service": "Slaboproud",
+      "type": "Komerční objekt",
+      "date": "05 / 2024",
+      "city": "Zlín",
+      "description": "Strukturovaná kabeláž Cat6A, Wi-Fi pokrytí celého objektu, IP kamerový systém s centrálním záznamem.",
+      "image": ""
+    },
+    {
+      "title": "Chytrá vila – KNX + fotovoltaika",
+      "service": "KNX",
+      "type": "Vila",
+      "date": "02 / 2024",
+      "city": "Luhačovice",
+      "description": "Integrace KNX s FV systémem a bateriovým úložištěm. Automatická prioritizace vlastní energie.",
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=700&q=75"
+    },
+    {
+      "title": "Průmyslový rozvaděč NN – výrobní linka",
+      "service": "Silnoproud",
+      "type": "Průmyslový objekt",
+      "date": "09 / 2023",
+      "city": "Otrokovice",
+      "description": "Dodávka a montáž silnoproudého rozvaděče pro novou výrobní linku včetně projektu a revize.",
+      "image": "https://images.unsplash.com/photo-1565514158740-064f34bd6cfd?w=700&q=75"
+    }
+  ]
+}
