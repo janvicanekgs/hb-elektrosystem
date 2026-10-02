@@ -318,10 +318,8 @@
       <!-- Filtry -->
       <div class="filters reveal">
         <button class="filter-btn active" data-filter="vse">Vše</button>
-        <button class="filter-btn" data-filter="KNX">KNX</button>
-        <button class="filter-btn" data-filter="Silnoproud">Silnoproud</button>
-        <button class="filter-btn" data-filter="Slaboproud">Slaboproud</button>
-        <button class="filter-btn" data-filter="MaR">MaR</button>
+        <button class="filter-btn" data-filter="Soukromá">Soukromé zakázky</button>
+        <button class="filter-btn" data-filter="Veřejná">Veřejné zakázky</button>
       </div>
 
       <!-- Karty – generuje JavaScript z data/references.json -->
@@ -356,7 +354,18 @@
       'MaR':        'fa-sliders-h'
     };
 
-    // Reveal animace
+    function generateSlug(title) {
+      return title.toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
+    function parseDate(dateStr) {
+      const parts = dateStr.split(' / ');
+      return parseInt(parts[1]) * 100 + parseInt(parts[0]);
+    }
+
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
@@ -375,7 +384,7 @@
           const filter = btn.dataset.filter;
           let visible = 0;
           document.querySelectorAll('.ref-card').forEach(card => {
-            const match = filter === 'vse' || card.dataset.service === filter;
+            const match = filter === 'vse' || card.dataset.category === filter;
             card.style.display = match ? '' : 'none';
             if (match) visible++;
           });
@@ -393,22 +402,27 @@
       try {
         const res  = await fetch('/data/references.json');
         const data = await res.json();
-        const refs = data.references || [];
+        const refs = (data.references || []).sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
         refs.forEach(ref => {
-          const icon   = SERVICE_ICONS[ref.service] || 'fa-bolt';
+          const icon    = SERVICE_ICONS[ref.service] || 'fa-bolt';
+          const slug    = generateSlug(ref.title);
           const imgHtml = ref.image
             ? `<img class="ref-card__img" src="${ref.image}" alt="${ref.title}">`
             : `<div class="ref-card__img-placeholder"><i class="fas ${icon}"></i></div>`;
 
           const article = document.createElement('article');
           article.className = 'ref-card reveal';
-          article.dataset.service = ref.service;
+          article.dataset.category = ref.category;
+          article.style.cursor = 'pointer';
+          article.addEventListener('click', () => {
+            window.location.href = `reference-detail.html?slug=${slug}`;
+          });
           article.innerHTML = `
             ${imgHtml}
             <div class="ref-card__body">
               <div class="ref-card__meta">
-                <span class="tag tag--service"><i class="fas ${icon}"></i> ${ref.service}</span>
+                <span class="tag tag--service">${ref.category} zakázka</span>
                 <span class="tag tag--type">${ref.type}</span>
                 <span class="ref-card__date">${ref.date}</span>
               </div>
@@ -416,6 +430,7 @@
               <p class="ref-card__desc">${ref.description}</p>
               <div class="ref-card__footer">
                 <span class="ref-card__city"><i class="fas fa-map-marker-alt"></i> ${ref.city}</span>
+                <span style="font-size:12px;color:var(--green);display:flex;align-items:center;gap:4px;">Číst více <i class="fas fa-arrow-right" style="font-size:10px;"></i></span>
               </div>
             </div>
           `;
@@ -431,9 +446,7 @@
         totalCount.textContent = '0';
       }
 
-      // Reveal pro statické prvky (hlavička, filtry)
       document.querySelectorAll('.reveal:not(.ref-card)').forEach(el => revealObserver.observe(el));
-
       initFilters();
     }
 

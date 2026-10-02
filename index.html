@@ -544,22 +544,24 @@
     .hero__stats {
       display: flex;
       gap: var(--s5);
-      padding-top: var(--s3);
+      padding-top: var(--s4);
       border-top: 1px solid var(--border);
     }
     .hero__stat-num {
       font-family: var(--f-display);
-      font-size: 30px;
-      font-weight: 700;
+      font-size: clamp(38px, 5vw, 54px);
+      font-weight: 800;
       color: var(--white);
       line-height: 1;
+      letter-spacing: -1px;
     }
     .hero__stat-num--green { color: var(--green); }
     .hero__stat-lbl {
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 600;
       color: var(--muted);
-      margin-top: 4px;
-      letter-spacing: 1px;
+      margin-top: 6px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
@@ -1042,13 +1044,13 @@
           <a href="#kontakt" class="btn btn-primary">Nezávazná poptávka</a>
           <a href="#reference" class="btn btn-outline">Naše reference</a>
         </div>
-        <div class="hero__stats">
+        <div class="hero__stats" id="heroStats">
           <div>
-            <div class="hero__stat-num">20+</div>
+            <div class="hero__stat-num" id="statYears" data-target="20">0+</div>
             <div class="hero__stat-lbl">let zkušeností</div>
           </div>
           <div>
-            <div class="hero__stat-num">100+</div>
+            <div class="hero__stat-num" id="statProjects" data-target="100">0+</div>
             <div class="hero__stat-lbl">realizací</div>
           </div>
           <div>
@@ -1171,8 +1173,8 @@
         <div class="feat-card reveal reveal-delay-3">
           <div class="feat-card__icon"><i class="fas fa-clock-rotate-left"></i></div>
           <div>
-            <h3 class="feat-card__title">15+ let zkušeností</h3>
-            <p class="feat-card__desc">Od roku 2010 jsme úspěšně dokončili přes 200 realizací. Naše zkušenosti jsou zárukou spolehlivosti a kvality.</p>
+            <h3 class="feat-card__title">20+ let zkušeností</h3>
+            <p class="feat-card__desc">Od roku 2004 jsme úspěšně dokončili přes 200 realizací. Naše zkušenosti jsou zárukou spolehlivosti a kvality.</p>
           </div>
         </div>
         <div class="feat-card reveal reveal-delay-4">
@@ -1202,7 +1204,7 @@
             <div class="gal-card">
               <img class="gal-card__img" src="https://static.wixstatic.com/media/11062b_bb79545dc3824f2bb55560cc1ff0ef60~mv2.jpg" alt="Rodinný dům – chytrá instalace" loading="lazy">
               <div class="gal-card__overlay"></div>
-              <span class="gal-card__tag">KNX</span>
+              <span class="gal-card__tag">Soukromá zakázka</span>
               <div class="gal-card__info">
                 <div class="gal-card__title">Rodinný dům — chytrá instalace</div>
                 <div class="gal-card__loc"><i class="fas fa-location-dot"></i> Zlín</div>
@@ -1211,7 +1213,7 @@
             <div class="gal-card">
               <img class="gal-card__img" src="https://static.wixstatic.com/media/11062b_2754ce5e6b154f00b5f602df5f258807~mv2.jpg" alt="Administrativní budova" loading="lazy">
               <div class="gal-card__overlay"></div>
-              <span class="gal-card__tag gal-card__tag--blue">Silnoproud</span>
+              <span class="gal-card__tag gal-card__tag--blue">Veřejná zakázka</span>
               <div class="gal-card__info">
                 <div class="gal-card__title">Administrativní budova</div>
                 <div class="gal-card__loc"><i class="fas fa-location-dot"></i> Brno</div>
@@ -1220,7 +1222,7 @@
             <div class="gal-card">
               <img class="gal-card__img" src="https://static.wixstatic.com/media/11062b_a196769bf1bc419bba88f9ffaa768614~mv2.jpg" alt="Bytový dům – kompletní elektro" loading="lazy">
               <div class="gal-card__overlay"></div>
-              <span class="gal-card__tag">KNX</span>
+              <span class="gal-card__tag">Soukromá zakázka</span>
               <div class="gal-card__info">
                 <div class="gal-card__title">Bytový dům — kompletní elektro</div>
                 <div class="gal-card__loc"><i class="fas fa-location-dot"></i> Praha</div>
@@ -1229,7 +1231,7 @@
             <div class="gal-card">
               <img class="gal-card__img" src="https://static.wixstatic.com/media/11062b_272b030ca93a439b965f95763ed27bcc~mv2.jpg" alt="Průmyslová hala – MaR systém" loading="lazy">
               <div class="gal-card__overlay"></div>
-              <span class="gal-card__tag gal-card__tag--orange">MaR</span>
+              <span class="gal-card__tag gal-card__tag--orange">Veřejná zakázka</span>
               <div class="gal-card__info">
                 <div class="gal-card__title">Průmyslová hala — MaR systém</div>
                 <div class="gal-card__loc"><i class="fas fa-location-dot"></i> Ostrava</div>
@@ -1482,6 +1484,90 @@
         btn.disabled = false;
       });
     }
+  </script>
+
+  <!-- Counter animace pro hero statistiky -->
+  <script>
+    function animateCounter(el, target, duration) {
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current + '+';
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const years    = document.getElementById('statYears');
+          const projects = document.getElementById('statProjects');
+          if (years)    animateCounter(years,    parseInt(years.dataset.target),    1400);
+          if (projects) animateCounter(projects, parseInt(projects.dataset.target), 1800);
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsEl = document.getElementById('heroStats');
+    if (statsEl) statsObserver.observe(statsEl);
+  </script>
+
+  <!-- Scroll-driven cable animation -->
+  <div id="cableWrap">
+    <svg id="cableSvg" viewBox="0 0 48 1000" preserveAspectRatio="none" width="48" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="cableGlow" x="-100%" y="-5%" width="300%" height="110%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+      <!-- Konektor nahoře -->
+      <rect x="17" y="0" width="14" height="12" rx="3" fill="#6ab42a" opacity="0.55"/>
+      <rect x="20" y="12" width="8" height="6" rx="1" fill="#6ab42a" opacity="0.4"/>
+      <!-- Kabel (tmavý základ – vždy viditelný) -->
+      <path id="cableBg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,982" fill="none" stroke="#162236" stroke-width="8" stroke-linecap="round"/>
+      <!-- Kabel (zelená animovaná část) -->
+      <path id="cableFg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,982" fill="none" stroke="#6ab42a" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Pohyblivý spark na konci -->
+      <circle id="cableSpark" r="5.5" fill="#6ab42a" opacity="0"/>
+    </svg>
+  </div>
+  <style>
+    #cableWrap{position:fixed;right:12px;top:0;width:48px;height:100vh;pointer-events:none;z-index:90;}
+    @media(max-width:1100px){#cableWrap{display:none;}}
+  </style>
+  <script>
+    (function(){
+      const fg    = document.getElementById('cableFg');
+      const spark = document.getElementById('cableSpark');
+      if(!fg) return;
+      let raf = null;
+      const len = fg.getTotalLength();
+      fg.style.strokeDasharray  = len;
+      fg.style.strokeDashoffset = len;
+      function draw(){
+        const progress = Math.min(window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1), 1);
+        const drawn = len * progress;
+        fg.style.strokeDashoffset = len - drawn;
+        if(progress > 0.01){
+          const pt = fg.getPointAtLength(Math.min(drawn, len - 0.5));
+          spark.setAttribute('cx', pt.x);
+          spark.setAttribute('cy', pt.y);
+          spark.setAttribute('filter','url(#cableGlow)');
+          spark.style.opacity = '1';
+        } else {
+          spark.style.opacity = '0';
+        }
+        raf = null;
+      }
+      window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(draw); }, {passive:true});
+      draw();
+    })();
   </script>
 
   <!-- Netlify Identity – nutné pro přihlášení do /admin -->

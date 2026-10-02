@@ -19,9 +19,15 @@ collections:
             label: "Reference"
             label_singular: "Referenci"
             widget: "list"
-            summary: "{{fields.title}} – {{fields.city}} ({{fields.service}})"
+            summary: "{{fields.title}} – {{fields.city}} ({{fields.category}})"
             fields:
               - { name: "title", label: "Název projektu", widget: "string" }
+              - name: "category"
+                label: "Kategorie zakázky"
+                widget: "select"
+                options:
+                  - { label: "Soukromá zakázka", value: "Soukromá" }
+                  - { label: "Veřejná zakázka", value: "Veřejná" }
               - name: "service"
                 label: "Typ služby"
                 widget: "select"
@@ -33,5 +39,13 @@ collections:
               - { name: "type", label: "Typ objektu", widget: "string", hint: "Např.: Rodinný dům, Bytový dům, Komerční objekt, Vila, Průmyslový objekt" }
               - { name: "date", label: "Datum realizace", widget: "string", hint: "Formát: MM / YYYY (např. 03 / 2025)" }
               - { name: "city", label: "Město", widget: "string" }
-              - { name: "description", label: "Popis", widget: "text", hint: "Krátký popis projektu (1–2 věty)" }
-              - { name: "image", label: "Fotografie", widget: "image", required: false, allow_multiple: false, hint: "Nepovinné – pokud nezadáte, zobrazí se ikona." }
+              - { name: "description", label: "Krátký popis (pro kartu)", widget: "text", hint: "1–2 věty zobrazené na kartě v seznamu referencí" }
+              - { name: "image", label: "Úvodní fotografie", widget: "image", required: false, allow_multiple: false, hint: "Hlavní foto projektu – zobrazí se jako první na detailu i na kartě" }
+              - { name: "zadani", label: "Zadání", widget: "text", hint: "Co klient požadoval? Co byl cíl projektu?" }
+              - { name: "co_jsme_udelali", label: "Co jsme udělali", widget: "text", hint: "Jak jsme projekt realizovali? Co konkrétně bylo součástí?" }
+              - name: "gallery"
+                label: "Fotogalerie z realizace"
+                widget: "list"
+                required: false
+                hint: "Fotografie z průběhu a výsledku prací (nepovinné)"
+                field: { name: "image", label: "Fotografie", widget: "image" }
