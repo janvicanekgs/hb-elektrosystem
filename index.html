@@ -1297,7 +1297,7 @@
               <label class="form-label">Poptávka *</label>
               <textarea name="poptavka" class="form-textarea" placeholder="Popište, o jakou službu máte zájem a o jaký projekt se jedná" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary form-submit">
+            <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
               Odeslat poptávku <i class="fas fa-paper-plane"></i>
             </button>
           </form>
@@ -1519,41 +1519,75 @@
 
   <!-- Scroll-driven cable animation -->
   <div id="cableWrap">
-    <svg id="cableSvg" viewBox="0 0 48 1000" preserveAspectRatio="none" width="48" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <svg id="cableSvg" viewBox="0 0 48 1000" preserveAspectRatio="none" width="48" height="100%" overflow="visible" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <filter id="cableGlow" x="-100%" y="-5%" width="300%" height="110%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+        <filter id="cableGlow" x="-200%" y="-5%" width="500%" height="110%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
           <feComposite in="SourceGraphic" in2="blur" operator="over"/>
         </filter>
       </defs>
       <!-- Konektor nahoře -->
       <rect x="17" y="0" width="14" height="12" rx="3" fill="#6ab42a" opacity="0.55"/>
       <rect x="20" y="12" width="8" height="6" rx="1" fill="#6ab42a" opacity="0.4"/>
-      <!-- Kabel (tmavý základ – vždy viditelný) -->
-      <path id="cableBg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,982" fill="none" stroke="#162236" stroke-width="8" stroke-linecap="round"/>
-      <!-- Kabel (zelená animovaná část) -->
-      <path id="cableFg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,982" fill="none" stroke="#6ab42a" stroke-width="3.5" stroke-linecap="round"/>
-      <!-- Pohyblivý spark na konci -->
+      <!-- Kabel (tmavý základ) -->
+      <path id="cableBg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,900 Q10,960 -600,990" fill="none" stroke="#162236" stroke-width="8" stroke-linecap="round"/>
+      <!-- Kabel (animovaný zelený) -->
+      <path id="cableFg" d="M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,900 Q10,960 -600,990" fill="none" stroke="#6ab42a" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Spark -->
       <circle id="cableSpark" r="5.5" fill="#6ab42a" opacity="0"/>
     </svg>
   </div>
   <style>
-    #cableWrap{position:fixed;right:12px;top:0;width:48px;height:100vh;pointer-events:none;z-index:90;}
+    #cableWrap{position:fixed;right:12px;top:0;width:48px;height:100vh;pointer-events:none;z-index:90;overflow:visible;}
     @media(max-width:1100px){#cableWrap{display:none;}}
+    #submitBtn{transition:box-shadow 0.4s ease,transform 0.2s ease;}
+    #submitBtn.cable-powered{
+      box-shadow:0 8px 22px rgba(106,180,42,0.38),0 0 0 0 rgba(106,180,42,0.5);
+      animation:cablePulse 1.6s ease-in-out infinite;
+    }
+    @keyframes cablePulse{
+      0%,100%{box-shadow:0 8px 22px rgba(106,180,42,0.38),0 0 20px rgba(106,180,42,0.2);}
+      50%{box-shadow:0 8px 22px rgba(106,180,42,0.6),0 0 40px rgba(106,180,42,0.4),0 0 0 8px rgba(106,180,42,0.1);}
+    }
   </style>
   <script>
     (function(){
-      const fg    = document.getElementById('cableFg');
-      const spark = document.getElementById('cableSpark');
+      const fg     = document.getElementById('cableFg');
+      const bg     = document.getElementById('cableBg');
+      const spark  = document.getElementById('cableSpark');
+      const btnEl  = document.getElementById('submitBtn');
       if(!fg) return;
-      let raf = null;
-      const len = fg.getTotalLength();
+
+      /* Dynamicky zakřivíme konec kabelu na tlačítko */
+      function updatePath(){
+        if(!btnEl) return;
+        const svgRect  = document.getElementById('cableWrap').getBoundingClientRect();
+        const btnRect  = btnEl.getBoundingClientRect();
+        const btnCx    = btnRect.left + btnRect.width * 0.5;
+        const svgLeft  = svgRect.left;
+        /* Převod obrazovkových px na SVG souřadnice (x: 0-48 = svgRect.width px) */
+        const scaleX   = 48 / svgRect.width;
+        const targetX  = (btnCx - svgLeft) * scaleX; /* záporné = vlevo od SVG */
+        const d = `M24,18 Q46,168 24,280 Q2,392 24,500 Q46,608 24,720 Q2,832 24,900 Q14,960 ${targetX.toFixed(0)},990`;
+        fg.setAttribute('d', d);
+        bg.setAttribute('d', d);
+        len = fg.getTotalLength();
+        fg.style.strokeDasharray = len;
+        draw();
+      }
+
+      let len = fg.getTotalLength();
       fg.style.strokeDasharray  = len;
       fg.style.strokeDashoffset = len;
+
+      let raf = null;
+      let powered = false;
+
       function draw(){
         const progress = Math.min(window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1), 1);
         const drawn = len * progress;
         fg.style.strokeDashoffset = len - drawn;
+
         if(progress > 0.01){
           const pt = fg.getPointAtLength(Math.min(drawn, len - 0.5));
           spark.setAttribute('cx', pt.x);
@@ -1563,9 +1597,18 @@
         } else {
           spark.style.opacity = '0';
         }
+
+        /* Rozsvícení tlačítka když kabel dojede */
+        if(btnEl){
+          if(progress > 0.88 && !powered){ btnEl.classList.add('cable-powered'); powered = true; }
+          if(progress < 0.85 && powered){ btnEl.classList.remove('cable-powered'); powered = false; }
+        }
         raf = null;
       }
+
       window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(draw); }, {passive:true});
+      window.addEventListener('resize', updatePath);
+      setTimeout(updatePath, 200);
       draw();
     })();
   </script>
