@@ -1281,21 +1281,27 @@
             <p style="display:none;"><input name="bot-field"></p>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">Jméno</label>
-                <input type="text" name="jmeno" class="form-input" placeholder="Jan Novák">
+                <label class="form-label" for="f-jmeno">Jméno</label>
+                <input type="text" id="f-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák">
               </div>
               <div class="form-group">
-                <label class="form-label">Telefon *</label>
-                <input type="tel" name="telefon" class="form-input" placeholder="+420 xxx xxx xxx" required>
+                <label class="form-label" for="f-telefon">Telefon *</label>
+                <input type="tel" id="f-telefon" name="telefon" class="form-input" placeholder="+420 xxx xxx xxx" required>
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">E-mail *</label>
-              <input type="email" name="email" class="form-input" placeholder="vas@email.cz" required>
+              <label class="form-label" for="f-email">E-mail *</label>
+              <input type="email" id="f-email" name="email" class="form-input" placeholder="vas@email.cz" required>
             </div>
             <div class="form-group">
-              <label class="form-label">Poptávka *</label>
-              <textarea name="poptavka" class="form-textarea" placeholder="Popište, o jakou službu máte zájem a o jaký projekt se jedná" required></textarea>
+              <label class="form-label" for="f-poptavka">Poptávka *</label>
+              <textarea id="f-poptavka" name="poptavka" class="form-textarea" placeholder="Popište, o jakou službu máte zájem a o jaký projekt se jedná" required></textarea>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;">
+              <input type="checkbox" id="f-gdpr" name="gdpr" required style="margin-top:3px;width:16px;height:16px;accent-color:var(--green);flex-shrink:0;">
+              <label for="f-gdpr" style="font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer;">
+                Souhlasím se zpracováním osobních údajů za účelem odpovědi na mou poptávku. Více informací v <a href="privacy.html" target="_blank" style="color:var(--green);">zásadách ochrany osobních údajů</a>. *
+              </label>
             </div>
             <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
               Odeslat poptávku <i class="fas fa-paper-plane"></i>
@@ -1317,6 +1323,7 @@
           <a href="#sluzby" class="footer__link">Služby</a>
           <a href="#reference" class="footer__link">Reference</a>
           <a href="#kontakt" class="footer__link">Kontakt</a>
+          <a href="privacy.html" class="footer__link">Ochrana osobních údajů</a>
         </nav>
         <p class="footer__addr">Zlín, Březnická 5602, PSČ 760 01</p>
       </div>
@@ -1564,6 +1571,20 @@
       window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(draw); }, {passive:true});
       draw();
     })();
+  </script>
+
+  <!-- Cookie informační banner -->
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#162236;border-top:1px solid rgba(255,255,255,0.09);padding:16px 24px;display:none;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
+    <p style="font-size:13px;color:#8a9baa;flex:1;min-width:200px;margin:0;">
+      Tento web používá Google Fonts pro zobrazení písem – při načtení Vaše IP adresa projde přes servery Googlu. Žádné analytické ani marketingové cookies nepoužíváme.
+      <a href="privacy.html" style="color:#6ab42a;">Více informací</a>
+    </p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1');" style="background:#6ab42a;color:#fff;padding:9px 22px;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;">Rozumím</button>
+  </div>
+  <script>
+    if (!localStorage.getItem('cookieOk')) {
+      document.getElementById('cookieBanner').style.display = 'flex';
+    }
   </script>
 
   <!-- Netlify Identity – nutné pro přihlášení do /admin -->

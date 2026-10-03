@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zásady ochrany osobních údajů – H&B Elektrosystem</title>
+  <meta name="description" content="Informace o zpracování osobních údajů a cookies na webu H&B Elektrosystem s.r.o.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --dark:       #0d1927;
+      --dark-2:     #162236;
+      --dark-3:     #1e2f45;
+      --green:      #6ab42a;
+      --white:      #ffffff;
+      --text:       #e8ecf0;
+      --muted:      #8a9baa;
+      --border:     rgba(255,255,255,0.09);
+      --f-display:  'Chakra Petch', sans-serif;
+      --f-body:     'Montserrat', sans-serif;
+      --max-w:      820px;
+      --nav-h:      90px;
+      --transition: all 0.28s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f-body); background: var(--dark); color: var(--text); line-height: 1.75; overflow-x: hidden; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: var(--f-body); border: none; background: none; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      height: var(--nav-h);
+      background: rgba(13,25,39,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .nav__inner { display: flex; align-items: center; gap: 32px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .nav__logo img { height: 44px; width: auto; }
+    .nav__back {
+      margin-left: auto;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .nav__back:hover { color: var(--green); text-decoration: none; }
+
+    /* ── PAGE ── */
+    .page {
+      padding: 64px 0 96px;
+    }
+    .page__eyebrow {
+      font-family: var(--f-display);
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .page__title {
+      font-family: var(--f-display);
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .page__meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── CONTENT ── */
+    .pp h2 {
+      font-family: var(--f-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin: 40px 0 12px;
+      padding-left: 12px;
+      border-left: 3px solid var(--green);
+    }
+    .pp h2:first-child { margin-top: 0; }
+    .pp p { font-size: 14.5px; color: var(--text); margin-bottom: 14px; }
+    .pp ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin-bottom: 14px;
+    }
+    .pp ul li { font-size: 14.5px; color: var(--text); margin-bottom: 6px; }
+    .pp table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .pp table th {
+      background: var(--dark-2);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .pp table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .pp .highlight {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .pp .highlight p { margin-bottom: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 36px 0 28px;
+      text-align: center;
+    }
+    .footer__links { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer__link { font-size: 13px; color: var(--muted); transition: var(--transition); }
+    .footer__link:hover { color: var(--green); text-decoration: none; }
+    .footer__copy { font-size: 12.5px; color: var(--muted); }
+
+    /* ── Cookie banner ── */
+    #cookieBanner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      background: var(--dark-2);
+      border-top: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
+    }
+    #cookieBanner p { font-size: 13px; color: var(--muted); flex: 1; min-width: 200px; margin: 0; }
+    #cookieBanner a { color: var(--green); }
+    #cookieBanner button {
+      background: var(--green); color: #fff;
+      padding: 9px 22px; border-radius: 6px;
+      font-size: 13px; font-weight: 600;
+      white-space: nowrap;
+    }
+    #cookieBanner button:hover { background: #5a9a22; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="logo-inverzni.svg" alt="H&B Elektrosystem – zpět na úvod">
+      </a>
+      <a href="javascript:history.back()" class="nav__back">
+        <i class="fas fa-arrow-left"></i> Zpět
+      </a>
+    </div>
+  </nav>
+
+  <!-- OBSAH -->
+  <main class="page">
+    <div class="container">
+      <p class="page__eyebrow">Právní informace</p>
+      <h1 class="page__title">Zásady ochrany<br>osobních údajů</h1>
+      <p class="page__meta">Poslední aktualizace: říjen 2026</p>
+
+      <div class="pp">
+
+        <h2>1. Správce osobních údajů</h2>
+        <div class="highlight">
+          <p><strong>H&amp;B Elektrosystem s.r.o.</strong><br>
+          Březnická 5602, 760 01 Zlín<br>
+          IČO: 291 96 256<br>
+          E-mail: <a href="mailto:info@hbelektrosystem.cz">info@hbelektrosystem.cz</a></p>
+        </div>
+        <p>Jako správce osobních údajů zpracováváme Vaše osobní údaje v souladu s Nařízením EU 2016/679 (GDPR) a zákonem č. 110/2019 Sb., o zpracování osobních údajů.</p>
+
+        <h2>2. Jaké osobní údaje zpracováváme</h2>
+        <p>Na tomto webu zpracováváme osobní údaje výhradně prostřednictvím <strong>kontaktního formuláře</strong>. Konkrétně:</p>
+        <ul>
+          <li>Jméno (nepovinné)</li>
+          <li>Telefonní číslo</li>
+          <li>E-mailová adresa</li>
+          <li>Text poptávky</li>
+        </ul>
+        <p>Neprovozujeme zákaznické účty, nezpracováváme platební údaje ani jiné citlivé kategorie osobních údajů.</p>
+
+        <h2>3. Účel a právní základ zpracování</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Účel</th>
+              <th>Právní základ</th>
+              <th>Doba uchování</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Odpověď na poptávku / navázání obchodní spolupráce</td>
+              <td>Čl. 6 odst. 1 písm. b) GDPR – plnění smlouvy / předsmluvní vztah</td>
+              <td>Po dobu jednání a případné spolupráce, nejdéle 3 roky od odeslání poptávky</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Vaše údaje nepoužíváme k marketingu, neposíláme newslettery ani neprodáváme data třetím stranám.</p>
+
+        <h2>4. Příjemci osobních údajů</h2>
+        <p>Odeslané formuláře jsou doručovány prostřednictvím služby <strong>Netlify Forms</strong> (Netlify, Inc., USA). Netlify zpracovává údaje jako náš zpracovatel na základě standardních smluvních doložek dle čl. 46 GDPR. Více informací: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.</p>
+        <p>K Vašim údajům mají přístup pouze zaměstnanci H&amp;B Elektrosystem s.r.o. odpovídající za obchodní komunikaci. Údaje nepředáváme dalším třetím stranám.</p>
+
+        <h2>5. Cookies a technologie třetích stran</h2>
+        <p>Tento web <strong>nepoužívá analytické ani marketingové cookies</strong> (Google Analytics, Facebook Pixel ani podobné nástroje). Neprofilujeme návštěvníky.</p>
+
+        <p>Web využívá tyto technické služby třetích stran:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Služba</th>
+              <th>Účel</th>
+              <th>Co přenáší</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Fonts</strong> (Google LLC, USA)</td>
+              <td>Zobrazení písem (Chakra Petch, Montserrat)</td>
+              <td>IP adresa prohlížeče při načtení stránky. Google neukládá trvalé cookies při tomto použití. Více: <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts Privacy FAQ</a></td>
+            </tr>
+            <tr>
+              <td><strong>Font Awesome CDN</strong> (Cloudflare)</td>
+              <td>Ikony v rozhraní webu</td>
+              <td>IP adresa při načtení souborů ikon. Cloudflare může zpracovávat technická data dle svých <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">zásad ochrany soukromí</a></td>
+            </tr>
+            <tr>
+              <td><strong>Netlify</strong> (Netlify, Inc., USA)</td>
+              <td>Hosting webu, zpracování formulářů</td>
+              <td>Technické logy přístupu (IP adresa, čas, URL). Více: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Netlify Privacy Policy</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Použití Google Fonts a CDN ikon je technicky nezbytné pro správné zobrazení webu a zakládáme ho na oprávněném zájmu (čl. 6 odst. 1 písm. f) GDPR). Toto nepředstavuje marketingové sledování.</p>
+
+        <h2>6. Vaše práva</h2>
+        <p>V souladu s GDPR máte právo:</p>
+        <ul>
+          <li><strong>Na přístup</strong> – zjistit, jaké údaje o Vás zpracováváme</li>
+          <li><strong>Na opravu</strong> – požádat o opravu nepřesných údajů</li>
+          <li><strong>Na výmaz</strong> – požádat o smazání Vašich údajů (pokud neexistuje zákonný důvod pro jejich uchování)</li>
+          <li><strong>Na omezení zpracování</strong> – požádat o pozastavení zpracování</li>
+          <li><strong>Vznést námitku</strong> – proti zpracování na základě oprávněného zájmu</li>
+          <li><strong>Podat stížnost</strong> – u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.cz" target="_blank" rel="noopener">uoou.cz</a>), pokud se domníváte, že zpracování porušuje Vaše práva</li>
+        </ul>
+        <p>Pro uplatnění práv nebo jakékoli dotazy se obraťte na: <a href="mailto:info@hbelektrosystem.cz">info@hbelektrosystem.cz</a></p>
+
+        <h2>7. Zabezpečení</h2>
+        <p>Web je provozován přes šifrované připojení HTTPS. Přístupy k datům z formulářů jsou omezeny pouze na pověřené osoby. Pravidelně sledujeme bezpečnost používaných služeb třetích stran.</p>
+
+        <h2>8. Aktualizace těchto zásad</h2>
+        <p>Tyto zásady můžeme příležitostně aktualizovat. O podstatných změnách budeme informovat prostřednictvím viditelného oznámení na webu. Datum poslední aktualizace je uveden v záhlaví tohoto dokumentu.</p>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="max-width:1200px;">
+      <div class="footer__links">
+        <a href="index.html" class="footer__link">Úvod</a>
+        <a href="index.html#sluzby" class="footer__link">Služby</a>
+        <a href="reference.html" class="footer__link">Reference</a>
+        <a href="index.html#kontakt" class="footer__link">Kontakt</a>
+        <a href="privacy.html" class="footer__link" style="color:var(--green);">Ochrana osobních údajů</a>
+      </div>
+      <p class="footer__copy">© 2026 H&amp;B Elektrosystem s.r.o. &nbsp;·&nbsp; IČO: 291 96 256 &nbsp;·&nbsp; Březnická 5602, 760 01 Zlín</p>
+    </div>
+  </footer>
+
+  <!-- Cookie banner (sdílený s index.html) -->
+  <div id="cookieBanner" style="display:none;">
+    <p>Tento web používá Google Fonts pro zobrazení písem – při načtení stránky je Vaše IP adresa předána Googlu. Žádné analytické ani marketingové cookies nepoužíváme. <a href="privacy.html">Více informací</a></p>
+    <button onclick="document.getElementById('cookieBanner').style.display='none'; localStorage.setItem('cookieOk','1')">Rozumím</button>
+  </div>
+  <script>
+    if (!localStorage.getItem('cookieOk')) {
+      document.getElementById('cookieBanner').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
