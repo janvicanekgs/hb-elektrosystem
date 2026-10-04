@@ -1575,12 +1575,12 @@
   </script>
 
   <!-- Cookie informační banner -->
-  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#162236;border-top:1px solid rgba(255,255,255,0.09);padding:16px 24px;display:none;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
-    <p style="font-size:13px;color:#8a9baa;flex:1;min-width:200px;margin:0;">
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#162236;border-top:1px solid rgba(255,255,255,0.09);padding:18px 24px;flex-direction:column;align-items:center;text-align:center;gap:12px;box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
+    <p style="font-size:13px;color:#8a9baa;margin:0;max-width:640px;">
       Tento web používá Google Fonts pro zobrazení písem – při načtení Vaše IP adresa projde přes servery Googlu. Žádné analytické ani marketingové cookies nepoužíváme.
       <a href="privacy.html" style="color:#6ab42a;">Více informací</a>
     </p>
-    <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1');" style="background:#6ab42a;color:#fff;padding:9px 22px;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;">Rozumím</button>
+    <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1');" style="background:#6ab42a;color:#fff;padding:9px 28px;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;">Rozumím</button>
   </div>
   <script>
     if (!localStorage.getItem('cookieOk')) {
