@@ -22,6 +22,7 @@ collections:
             summary: "{{fields.title}} – {{fields.city}} ({{fields.category}})"
             fields:
               - { name: "title", label: "Název projektu", widget: "string" }
+              - { name: "featured", label: "⭐ Zobrazit na úvodní stránce", widget: "boolean", default: false, hint: "Zaškrtněte pro zobrazení v sekci Vybrané realizace na hlavní stránce" }
               - name: "category"
                 label: "Kategorie zakázky"
                 widget: "select"
