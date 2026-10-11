@@ -1356,6 +1356,13 @@
       return parseInt(p[1] || 0) * 100 + parseInt(p[0] || 0);
     }
 
+    function getGalPerPage() {
+      const w = window.innerWidth;
+      if (w <= 560)  return 1;
+      if (w <= 1024) return 2;
+      return 4;
+    }
+
     function initGalleryCarousel() {
       const track   = document.getElementById('galleryTrack');
       const dotsEl  = document.getElementById('galDots');
@@ -1366,17 +1373,24 @@
       dotsEl.innerHTML = '';
       // Remove old clones if re-initialising
       track.querySelectorAll('.gal-clone').forEach(c => c.remove());
+      track.style.transition = 'none';
+      track.style.transform  = 'translateX(0)';
 
-      const cards = Array.from(track.children);
-      const total = cards.length;
+      const cards    = Array.from(track.children);
+      const total    = cards.length;
+      const perPage  = getGalPerPage();
+      const needsCarousel = total > perPage;
 
-      // Klonovat jen pokud je víc než 1 karta
-      if (total > 1) {
-        const clonesBefore = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
-        const clonesAfter  = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
-        clonesBefore.forEach(c => track.prepend(c));
-        clonesAfter.forEach(c  => track.appendChild(c));
-      }
+      // Hide nav if all cards fit in one view
+      btnPrev.style.display = needsCarousel ? '' : 'none';
+      btnNext.style.display = needsCarousel ? '' : 'none';
+      if (!needsCarousel) return;
+
+      // Klonovat pro nekonečný scroll
+      const clonesBefore = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
+      const clonesAfter  = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
+      clonesBefore.forEach(c => track.prepend(c));
+      clonesAfter.forEach(c  => track.appendChild(c));
 
       let currentIdx = 0;
       let isAnimating = false;
@@ -1397,7 +1411,7 @@
       }
 
       function setPosition(idx, animate) {
-        const offset = total > 1 ? (total + idx) * getCardWidth() : 0;
+        const offset = (total + idx) * getCardWidth();
         track.style.transition = animate ? 'transform 0.52s cubic-bezier(0.4,0,0.2,1)' : 'none';
         track.style.transform  = `translateX(-${offset}px)`;
       }
