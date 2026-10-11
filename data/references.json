@@ -18,6 +18,20 @@
         "/images/uploads/the-bird-3.jpg",
         "/images/uploads/the-bird-1.jpg"
       ]
+    },
+    {
+      "title": "Apartmán Haferky",
+      "featured": false,
+      "category": "Soukromá",
+      "service": "Silnoproud",
+      "type": "Apartmán",
+      "date": "02/2022",
+      "city": "Velké Karlovice",
+      "description": "Komplexní elektroinstalace čtyř apartmánů včetně KNX automatizace osvětlení, topení, stínění a přístupového systému v oblíbeném rekreačním areálu v srdci Velkých Karlovic.",
+      "image": "",
+      "zadani": "Investor požadoval kompletní elektroinstalaci nově budovaného areálu se čtyřmi apartmány (Anna, Ondřej, Smrk, Modřín) v rekreačním objektu Haferky ve Velkých Karlovicích. Cílem bylo zajistit komfortní a energeticky efektivní provoz ubytovacího zařízení s důrazem na jednoduché ovládání pro hosty i personál.",
+      "co_jsme_udelali": "Realizovali jsme kompletní elektroinstalaci silnoproudu a slaboproudu pro celý areál včetně projektové dokumentace. Součástí dodávky bylo nasazení systému KNX pro inteligentní řízení osvětlení, vytápění a stínění ve všech čtyřech apartmánech. Dále jsme instalovali systém MaR (měření a regulace) a přístupový systém pro bezpečný a bezobslužný provoz ubytování.",
+      "gallery": []
     }
   ]
 }
