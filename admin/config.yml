@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: janvicanekgs/hb-elektrosystem
   branch: main
+  base_url: https://hb-oauth.janvicanekgs.workers.dev
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
