@@ -1,3 +1,23 @@
 {
-  "references": []
+  "references": [
+    {
+      "title": "The Bird - Kompletni projekce",
+      "featured": true,
+      "category": "Soukromá",
+      "service": "KNX",
+      "type": "Vila",
+      "date": "06/2009",
+      "city": "Čeladná",
+      "description": "Dům, který odmítl jít po jednoduché cestě. Kompletní elektroinstalace, KNX automatizace a MaR pro jeden z nejodvážnějších rodinných domů v Beskydech.",
+      "image": "/images/uploads/the-bird.jpg",
+      "zadani": "Projekt The Bird vznikl jako architektonický výraz odmítnutí kompromisu – a stejně vysoké nároky měl klient i na technické zázemí domu. Požadavkem bylo kompletní řešení elektroinstalace od projektu až po realizaci, KNX systém pro řízení osvětlení, vytápění a dalších funkcí domu a systém MaR zajišťující automatizovanou regulaci technologií. Vše mělo být funkčně spolehlivé, ale zároveň nenápadné – technologie ve službách architektury, ne naopak.",
+      "co_jsme_udelali": "Zpracovali jsme kompletní projektovou dokumentaci elektroinstalace na míru dispozičnímu a konstrukčnímu řešení domu. Instalovali jsme KNX systém pro centrální řízení osvětlení, rolet a vytápění s možností scénářů a vzdálené správy. Součástí realizace byl i systém MaR zajišťující automatizovanou regulaci vzduchotechniky a vytápění. Veškeré technické prvky byly integrovány do architektury tak, aby zůstaly co nejméně viditelné a nerušily výsledný dojem výjimečného projektu.",
+      "gallery": [
+        "/images/uploads/the-bird.jpg",
+        "/images/uploads/the-bird-2.jpg",
+        "/images/uploads/the-bird-3.jpg",
+        "/images/uploads/the-bird-1.jpg"
+      ]
+    }
+  ]
 }
