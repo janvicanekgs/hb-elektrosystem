@@ -1240,9 +1240,11 @@
         </div>
         <div class="form-box reveal">
           <h3 class="form-box__title">Napište nám</h3>
-          <form name="poptavka" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
-            <input type="hidden" name="form-name" value="poptavka">
-            <p style="display:none;"><input name="bot-field"></p>
+          <form onsubmit="handleSubmit(event)">
+            <input type="hidden" name="access_key" value="710a2e5e-659a-4501-b55e-843b5b7a1b9a">
+            <input type="hidden" name="subject" value="Nová poptávka – H&B Elektrosystem">
+            <input type="hidden" name="from_name" value="Web H&B Elektrosystem">
+            <input type="checkbox" name="botcheck" style="display:none;">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="f-jmeno">Jméno</label>
@@ -1476,7 +1478,7 @@
       });
     });
 
-    // ── Formulář ───────────────────────────────────
+    // ── Formulář (Web3Forms) ───────────────────────
     function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
@@ -1484,15 +1486,20 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílám...';
       btn.disabled = true;
 
-      fetch('/', {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
       })
-      .then(() => {
-        btn.innerHTML = '✓ Odesláno — ozveme se vám!';
-        btn.style.background = '#3a8a1a';
-        form.reset();
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          btn.innerHTML = '✓ Odesláno — ozveme se vám!';
+          btn.style.background = '#3a8a1a';
+          form.reset();
+        } else {
+          throw new Error(data.message);
+        }
       })
       .catch(() => {
         btn.innerHTML = 'Chyba odeslání – zkuste znovu';
@@ -1596,19 +1603,6 @@
     }
   </script>
 
-  <!-- Netlify Identity – nutné pro přihlášení do /admin -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', function(user) {
-        if (!user) {
-          window.netlifyIdentity.on('login', function() {
-            document.location.href = '/admin/';
-          });
-        }
-      });
-    }
-  </script>
 
 </body>
 </html>
