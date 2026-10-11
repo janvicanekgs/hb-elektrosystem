@@ -1370,10 +1370,13 @@
       const cards = Array.from(track.children);
       const total = cards.length;
 
-      const clonesBefore = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
-      const clonesAfter  = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
-      clonesBefore.forEach(c => track.prepend(c));
-      clonesAfter.forEach(c  => track.appendChild(c));
+      // Klonovat jen pokud je víc než 1 karta
+      if (total > 1) {
+        const clonesBefore = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
+        const clonesAfter  = cards.map(c => { const cl = c.cloneNode(true); cl.classList.add('gal-clone'); return cl; });
+        clonesBefore.forEach(c => track.prepend(c));
+        clonesAfter.forEach(c  => track.appendChild(c));
+      }
 
       let currentIdx = 0;
       let isAnimating = false;
@@ -1394,7 +1397,7 @@
       }
 
       function setPosition(idx, animate) {
-        const offset = (total + idx) * getCardWidth();
+        const offset = total > 1 ? (total + idx) * getCardWidth() : 0;
         track.style.transition = animate ? 'transform 0.52s cubic-bezier(0.4,0,0.2,1)' : 'none';
         track.style.transform  = `translateX(-${offset}px)`;
       }
