@@ -36,6 +36,22 @@
         "/images/uploads/haferky_jidelna.jpg",
         "/images/uploads/haferky_tv.jpg"
       ]
+    },
+    {
+      "title": "RD Prakšice",
+      "featured": false,
+      "category": "Soukromá",
+      "service": "KNX",
+      "type": "Rodinný dům",
+      "date": "04/2011",
+      "city": "Prakšice u Uherského Brodu",
+      "description": "Majitel rodinného domu v Prakšicích chtěl víc než jen elektroinstalaci — jeho cílem byl skutečně inteligentní dům, kde vše funguje jako jeden celek. Žádné kompromisy, žádné oddělené systémy. Nadstandardní řešení, které bude pohodlné k ovládání a zároveň technicky na nejvyšší úrovni.",
+      "image": "/images/uploads/Snímek obrazovky 2026-10-20 v 18.21.20.png",
+      "zadani": "Majitel rodinného domu v Prakšicích chtěl víc než jen elektroinstalaci — jeho cílem byl skutečně inteligentní dům, kde vše funguje jako jeden celek. Žádné kompromisy, žádné oddělené systémy. Nadstandardní řešení, které bude pohodlné k ovládání a zároveň technicky na nejvyšší úrovni.",
+      "co_jsme_udelali": "Základem se stal systém KNX, do kterého jsme integrovali prakticky vše. Původní projektovou dokumentaci jsme kompletně přepracovali s ohledem na požadavky chytré domácnosti. Pod jeden střed se sešlo řízení osvětlení, venkovních žaluzií, vzduchotechniky v obytné části i v bazénovém prostoru, vytápění, ovládání vjezdové brány a garážových vrat i monitoring kamerového systému.\n\nPerlička celého projektu? Řízení kotle na tuhá paliva — konkrétně peletového systému včetně automatického podavače pelet ze zásobníku. Tahle integrace se běžně neprovádí a vyžadovala nestandardní přístup, který si vyžádal vlastní řešení na míru.\n\nVše je dostupné z centrálního ovládacího panelu umístěného v hlavní chodbě domu — přehledně, na jednom místě.",
+      "gallery": [
+        "/images/uploads/Snímek obrazovky 2026-10-20 v 18.21.20.png"
+      ]
     }
   ]
 }
