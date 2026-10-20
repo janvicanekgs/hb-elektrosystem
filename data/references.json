@@ -84,6 +84,23 @@
       "gallery": [
         "/images/uploads/rd rumy.jpg"
       ]
+    },
+    {
+      "title": "RD Nivy",
+      "featured": false,
+      "category": "Soukromá",
+      "service": "KNX",
+      "type": "Rodinný dům",
+      "date": "11/2024",
+      "city": "Zlín",
+      "description": "Ateliér PMA – Pavel Mudřík se na nás obrátil znovu. Tentokrát s projektem, který kladl mimořádné nároky jak na rozsah technologií, tak na jejich vzájemnou provázanost. Náročný zákazník, velký dům, nulové kompromisy. Každý detail řízení domu musel na sebe přirozeně navazovat — ovládání jednoduché, technologie za ním složitá.",
+      "image": "/images/uploads/nivy 1.jpg",
+      "zadani": "Ateliér PMA – Pavel Mudřík se na nás obrátil znovu. Tentokrát s projektem, který kladl mimořádné nároky jak na rozsah technologií, tak na jejich vzájemnou provázanost. Náročný zákazník, velký dům, nulové kompromisy. Každý detail řízení domu musel na sebe přirozeně navazovat — ovládání jednoduché, technologie za ním složitá.",
+      "co_jsme_udelali": "Projekce KNX prostupovala celým elektro projektem — silnoproud i slaboproud vznikaly s vědomím, že vše bude součástí jednoho řídicího systému. Osvětlení je řízeno přes DALI-KNX, což umožňuje přesnou regulaci každého okruhu individuálně. Součástí jsou panik světla — v případě potřeby se celé okolí domu okamžitě rozsvítí na maximum.\n\nZákazník si sám konfiguruje scény: propojení světla, zastínění i atmosféry do jednoho dotyku. Vnitřní žaluzie jsou součástí scén, venkovní reagují na meteostanici a polohu slunce. Dům se chová chytře podle ročního období — v létě drží žaluzie dole a brání přehřívání, na jaře a na podzim je naopak pouští nahoru a nechává přirozené teplo pracovat za sebe. Systém navrhuje, majitel kdykoli přebije.\n\nChlazení je řešeno chlazenými stropy — technologie elegantní na pohled, náročná na regulaci. Klíčové je hlídat rosný bod a vlhkost v interiéru, aby nedocházelo ke kondenzaci. To vyžaduje precizní spolupráci mezi měřením, regulací a vzduchotechnikou, která musí pracovat jako jeden organismus.\n\nWellness a venkovní bazén přidaly další vrstvu nároků na regulaci teploty a vlhkosti. Výsledkem je dům, který se stará sám — a majitel si určuje, jak moc mu to nechá.",
+      "gallery": [
+        "/images/uploads/nivy 1.jpg",
+        "/images/uploads/nivy 2.jpg"
+      ]
     }
   ]
 }
