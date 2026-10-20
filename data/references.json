@@ -68,6 +68,22 @@
       "gallery": [
         "/images/uploads/Snímek obrazovky 2026-10-20 v 19.05.19.png"
       ]
+    },
+    {
+      "title": "RD Růmy",
+      "featured": false,
+      "category": "Soukromá",
+      "service": "KNX",
+      "type": "Rodinný dům",
+      "date": "11/2017",
+      "city": "Zlín",
+      "description": "Architektonický ateliér PMa – Pavel Mudřík nás oslovil s projektem, kde technologie neslouží jako doplněk, ale jako součást architektury samotné. Každý detail interiéru byl promyšlený do posledního centimetru — a stejný přístup byl vyžadován od elektro. Osvětlení, vytápění, chlazení: ne tři systémy vedle sebe, ale jeden celek, který dýchá spolu s domem.",
+      "image": "/images/uploads/rd rumy 1.jpg",
+      "zadani": "Architektonický ateliér PMa – Pavel Mudřík nás oslovil s projektem, kde technologie neslouží jako doplněk, ale jako součást architektury samotné. Každý detail interiéru byl promyšlený do posledního centimetru — a stejný přístup byl vyžadován od elektro. Osvětlení, vytápění, chlazení: ne tři systémy vedle sebe, ale jeden celek, který dýchá spolu s domem.",
+      "co_jsme_udelali": "Majitel si určuje požadavky — dům si sám řídí, jak jich dosáhnout. Vytápění nebo chlazení? KNX to vyhodnotí a přepne automaticky. Pokud chce majitel zasáhnout, stačí jeden, maximálně dva kroky. Víc nepotřebuje.\n\nRealizace zahrnovala kompletní projekt inteligentního domu: montáž, oživení, prvky KNX, měření a regulaci, vytápění, chlazení i vzduchotechniku. Vnitřní bazén přinesl stejnou výzvu jako u jiných projektů — regulace teploty a vlhkosti v bazénovém prostoru je kapitola sama o sobě a vyžaduje precizní nastavení, které se ladí na míru konkrétnímu objektu.\n\nZastínění celého domu je řízeno meteostanicí — žaluzie reagují na slunce, vítr i denní dobu, majitel má ale vždy poslední slovo. Zavlažování zahrady běží automaticky, do systému vstupuje jen tehdy, když chce.\n\nČím se tento projekt odlišuje od ostatních: do KNX byl integrován domácí telefon. Videovrátný, přístupový systém, bezpečnostní monitoring — vše na jednom místě, vše v jednom rozhraní. Žádné přepínání mezi aplikacemi, žádné oddělené ovládání. Jeden dům, jeden systém.",
+      "gallery": [
+        "/images/uploads/rd rumy.jpg"
+      ]
     }
   ]
 }
