@@ -1075,7 +1075,7 @@
       <div class="services-grid">
 
         <div class="srv-card reveal reveal-delay-1" id="knx">
-          <div class="srv-card__bg" style="background-image:url('https://static.wixstatic.com/media/8a50fe_4f446c2e49564870a782115180674719~mv2.jpg')"></div>
+          <div class="srv-card__bg" style="background-image:url('/images/knx-panel.jpg')"></div>
           <div class="srv-card__overlay"></div>
           <div class="srv-card__body">
             <h3 class="srv-card__title">KNX &amp; chytrý dům</h3>
@@ -1085,7 +1085,7 @@
         </div>
 
         <div class="srv-card reveal reveal-delay-2">
-          <div class="srv-card__bg" style="background-image:url('https://static.wixstatic.com/media/8a50fe_e7296ea7cfdd4f44b9d1053e581ab622~mv2.jpg')"></div>
+          <div class="srv-card__bg" style="background-image:url('/images/mar-potrubi.jpg')"></div>
           <div class="srv-card__overlay"></div>
           <div class="srv-card__body">
             <h3 class="srv-card__title">Projekty &amp; MaR</h3>
@@ -1095,7 +1095,7 @@
         </div>
 
         <div class="srv-card reveal reveal-delay-3">
-          <div class="srv-card__bg" style="background-image:url('https://static.wixstatic.com/media/8a50fe_48a084f27b504faba2f06c3654e736b2~mv2.jpg')"></div>
+          <div class="srv-card__bg" style="background-image:url('/images/silnoproud-rozvadec.jpg')"></div>
           <div class="srv-card__overlay"></div>
           <div class="srv-card__body">
             <h3 class="srv-card__title">Silnoproud</h3>
@@ -1312,37 +1312,41 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ── Hero slider ────────────────────────────────
-    const slides = document.querySelectorAll('.hero__slide');
-    const dotsWrap = document.getElementById('heroDots');
-    let current = 0;
-    let timer;
+    let heroTimer;
+    function initHeroSlider() {
+      const slides   = Array.from(document.querySelectorAll('.hero__slide'));
+      const dotsWrap = document.getElementById('heroDots');
+      if (!slides.length || !dotsWrap) return;
 
-    // Vytvoř tečky
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'hero__dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Snímek ' + (i + 1));
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
+      clearInterval(heroTimer);
+      dotsWrap.innerHTML = '';
+      slides.forEach(s => s.classList.remove('active'));
+      slides[0].classList.add('active');
 
-    function goTo(index) {
-      slides[current].classList.remove('active');
-      dotsWrap.children[current].classList.remove('active');
-      current = index;
-      slides[current].classList.add('active');
-      dotsWrap.children[current].classList.add('active');
-      resetTimer();
+      let current = 0;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'hero__dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Snímek ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      function goTo(index) {
+        slides[current].classList.remove('active');
+        dotsWrap.children[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        dotsWrap.children[current].classList.add('active');
+        clearInterval(heroTimer);
+        heroTimer = setInterval(() => goTo((current + 1) % slides.length), 5000);
+      }
+
+      heroTimer = setInterval(() => goTo((current + 1) % slides.length), 5000);
     }
 
-    function next() { goTo((current + 1) % slides.length); }
-
-    function resetTimer() {
-      clearInterval(timer);
-      timer = setInterval(next, 5000);
-    }
-
-    resetTimer();
+    initHeroSlider();
 
     // ── Gallery: načtení z JSON + carousel ─────────
     function generateSlug(title) {
@@ -1480,6 +1484,27 @@
         }).join('');
 
         initGalleryCarousel();
+
+        // ── Dynamické hero slidy z featured referencí ──
+        const heroWithImages = refs.filter(r => r.featured && r.image);
+        if (heroWithImages.length > 0) {
+          const heroSection = document.querySelector('.hero');
+          const heroOverlay = heroSection?.querySelector('.hero__overlay');
+          if (heroSection && heroOverlay) {
+            // Odstraň statické slidy
+            heroSection.querySelectorAll('.hero__slide').forEach(s => s.remove());
+            // Vytvoř nové z referencí
+            heroWithImages.forEach(ref => {
+              const slide = document.createElement('div');
+              slide.className = 'hero__slide';
+              slide.style.backgroundImage = `url('${ref.image}')`;
+              slide.style.backgroundPosition = 'center';
+              heroSection.insertBefore(slide, heroOverlay);
+            });
+            initHeroSlider();
+          }
+        }
+
       } catch (e) {
         console.warn('Gallery load failed:', e);
         if (section) section.style.display = 'none';

@@ -248,6 +248,24 @@
     }
     .map-link a:hover { color: var(--green); }
 
+    /* ── FORMULÁŘ ── */
+    .form-section { margin-top: var(--s6); }
+    .form-section__head { margin-bottom: var(--s4); }
+    .form-box { background: var(--dark-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s5); }
+    .form-box__title { font-family: var(--f-display); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: var(--s4); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--s3); }
+    .form-label { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted); text-transform: uppercase; }
+    .form-input, .form-textarea {
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 16px;
+      font-family: var(--f-body); font-size: 14px; color: var(--white);
+      transition: var(--transition); outline: none; width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(106,180,42,0.12); }
+    .form-textarea { min-height: 130px; resize: vertical; }
+
     /* ── CTA BANNER ── */
     .cta-banner {
       margin-top: var(--s6);
@@ -486,19 +504,43 @@
 
       </div>
 
-      <!-- CTA BANNER -->
-      <div class="cta-banner reveal">
-        <div class="cta-banner__text">
-          <h3>Připravujete stavbu nebo rekonstrukci?</h3>
-          <p>Napište nám nebo zavolejte – rádi připravíme nabídku na míru.</p>
-        </div>
-        <div class="cta-banner__btns">
-          <a href="tel:+420737533252" class="btn btn-outline">
-            <i class="fas fa-phone"></i> Zavolat
-          </a>
-          <a href="mailto:bednarik@hbelektrosystem.cz" class="btn btn-primary">
-            <i class="fas fa-envelope"></i> Napsat e-mail
-          </a>
+      <!-- FORMULÁŘ -->
+      <div class="form-section reveal">
+        <div class="form-box">
+          <h3 class="form-box__title">Nezávazná poptávka</h3>
+          <form onsubmit="handleSubmit(event)">
+            <input type="hidden" name="access_key" value="710a2e5e-659a-4501-b55e-843b5b7a1b9a">
+            <input type="hidden" name="subject" value="Nová poptávka – H&B Elektrosystem">
+            <input type="hidden" name="from_name" value="Web H&B Elektrosystem">
+            <input type="checkbox" name="botcheck" style="display:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="k-jmeno">Jméno</label>
+                <input type="text" id="k-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="k-telefon">Telefon *</label>
+                <input type="tel" id="k-telefon" name="telefon" class="form-input" placeholder="+420 xxx xxx xxx" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="k-email">E-mail *</label>
+              <input type="email" id="k-email" name="email" class="form-input" placeholder="vas@email.cz" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="k-poptavka">Poptávka *</label>
+              <textarea id="k-poptavka" name="poptavka" class="form-textarea" placeholder="Popište, o jakou službu máte zájem a o jaký projekt se jedná" required></textarea>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;">
+              <input type="checkbox" id="k-gdpr" name="gdpr" required style="margin-top:3px;width:16px;height:16px;accent-color:var(--green);flex-shrink:0;">
+              <label for="k-gdpr" style="font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer;">
+                Souhlasím se zpracováním osobních údajů za účelem odpovědi na mou poptávku. Více informací v <a href="privacy.html" target="_blank" style="color:var(--green);">zásadách ochrany osobních údajů</a>. *
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Odeslat poptávku <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
         </div>
       </div>
 
@@ -543,6 +585,36 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Formulář (Web3Forms)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn  = form.querySelector('.form-submit');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílám...';
+      btn.disabled = true;
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          btn.innerHTML = '✓ Odesláno — ozveme se vám!';
+          btn.style.background = '#3a8a1a';
+          form.reset();
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch(() => {
+        btn.innerHTML = 'Chyba odeslání – zkuste znovu';
+        btn.style.background = '#c0392b';
+        btn.disabled = false;
+      });
+    }
   </script>
 
 </body>
