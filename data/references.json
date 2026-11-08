@@ -2,7 +2,7 @@
   "references": [
     {
       "title": "The Bird - Kompletni projekce",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "KNX",
       "type": "Vila",
@@ -21,7 +21,7 @@
     },
     {
       "title": "Apartmán Haferky",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "Silnoproud",
       "type": "Apartmán",
@@ -39,7 +39,7 @@
     },
     {
       "title": "RD Prakšice",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "KNX",
       "type": "Rodinný dům",
@@ -55,7 +55,7 @@
     },
     {
       "title": "RD Olomouc, ul. Zirmova",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "KNX",
       "type": "Rodinný dům",
@@ -71,7 +71,7 @@
     },
     {
       "title": "RD Růmy",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "KNX",
       "type": "Rodinný dům",
@@ -87,7 +87,7 @@
     },
     {
       "title": "RD Nivy",
-      "featured": false,
+      "featured": true,
       "category": "Soukromá",
       "service": "KNX",
       "type": "Rodinný dům",
