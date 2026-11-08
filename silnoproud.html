@@ -102,8 +102,8 @@
     .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:center;}
     .intro-grid__text p{font-size:15px;color:#4a5568;line-height:1.8;margin-bottom:var(--s3);}
     .intro-grid__text p:last-child{margin-bottom:0;}
-    .intro-grid__visual{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;}
-    .intro-grid__visual img{width:100%;height:100%;object-fit:cover;}
+    .intro-grid__visual{background:var(--dark-2);border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;}
+    .intro-grid__visual img{width:100%;height:100%;object-fit:contain;}
     @media(max-width:768px){.intro-grid{grid-template-columns:1fr;}.intro-grid__visual{order:-1;}}
 
     .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);}
@@ -296,8 +296,8 @@
             </div>
           </div>
         </div>
-        <div class="reveal reveal-delay-2" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
-          <img src="/images/silnoproud-rozvadec.jpg" alt="Silnoproudý rozvaděč KNX" style="width:100%;height:100%;object-fit:cover;">
+        <div class="reveal reveal-delay-2" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;background:var(--dark-2);">
+          <img src="/images/silnoproud-rozvadec.jpg" alt="Silnoproudý rozvaděč KNX" style="width:100%;height:100%;object-fit:contain;">
         </div>
       </div>
     </div>
