@@ -117,6 +117,22 @@
       "gallery": [
         "/images/uploads/mosnov-abb-robotics.webp"
       ]
+    },
+    {
+      "title": "Výrobní hala Toray - Prostějov",
+      "featured": true,
+      "category": "Veřejná",
+      "service": "KNX",
+      "type": "Průmyslový objekt",
+      "date": "01/2024",
+      "city": "Prostějov",
+      "description": "Investor měl jasno: systém DALI a komponenty výhradně od firmy WAGO. Nebyl to požadavek z rozmaru – v jiné budově závodu již WAGO řízení osvětlení úspěšně provozují a chtěli zachovat jednotný standard, na který jsou zvyklí. Zadání bylo technicky jednoduché, ale měřítko projektu nikoliv. Obrovská výrobní hala s nárokem na rovnoměrné a spolehlivé osvětlení každého pracovního místa.",
+      "image": "/images/uploads/toray-hala-z-venku.webp",
+      "zadani": "Toray Textiles Central Europe je japonský výrobce s prostějovským závodem fungujícím od roku 1999 – vyrábí polyesterové podšívkové tkaniny, tkaniny pro airbagy a speciální materiály pro ofsetový tisk. Závod zaměstnává přes 400 lidí a 95 % produkce míří na export. Když takový provoz potřebuje osvětlení, nejde o malou instalaci.\n\nInvestor měl jasno: systém DALI a komponenty výhradně od firmy WAGO. Nebyl to požadavek z rozmaru – v jiné budově závodu již WAGO řízení osvětlení úspěšně provozují a chtěli zachovat jednotný standard, na který jsou zvyklí. Zadání bylo technicky jednoduché, ale měřítko projektu nikoliv. Obrovská výrobní hala s nárokem na rovnoměrné a spolehlivé osvětlení každého pracovního místa.",
+      "co_jsme_udelali": "Naprogramovali jsme kompletní Lighting Management System (LMS) pro celou výrobní halu. LMS je inteligentní technologie pro automatizaci, regulaci a monitoring osvětlení v průmyslových provozech – zajišťuje, že správné místo dostane správné světlo ve správný čas, s minimální spotřebou energie a maximální spolehlivostí.\n\nV takto rozsáhlém provozu je důraz na rovnoměrné osvětlení každého pracovního sektoru klíčový – nejen z pohledu komfortu a bezpečnosti pracovníků, ale i z pohledu přesnosti výroby, kde záleží na každém detailu. Veškeré komponenty byly dodány od firmy WAGO dle požadavku investora.",
+      "gallery": [
+        "/images/uploads/toray-hala-zevnitr.jpg"
+      ]
     }
   ]
 }
