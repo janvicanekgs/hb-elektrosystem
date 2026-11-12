@@ -133,6 +133,26 @@
       "gallery": [
         "/images/uploads/toray-hala-zevnitr.jpg"
       ]
+    },
+    {
+      "title": "Administrativní budova UNICO MODULAR - Vizovice",
+      "featured": true,
+      "category": "Soukromá",
+      "service": "KNX",
+      "type": "Administrativní budova",
+      "date": "Probíhá",
+      "city": "Vizovice",
+      "description": "Sofistikovaný projekt administrativní budovy pro náročného investora s vysokými požadavky na estetiku i funkčnost interiéru i exteriéru. Budova je výrazně prosklená, což ji činí mimořádně náročnou na provoz – tepelné zisky v létě a tepelné ztráty v zimě kladou extrémní nároky na regulaci vytápění, chlazení a zastínění. Investor požadoval KNX systém, aby byl nezávislý na výběru koncových profilů v interiéru a aby vše ladilo s náčočným designem, pokrývající řízení osvětlení přes DALI, chlazení pomocí chlazených stropů, venkovní zastínění celé budovy a vytápění – vše provázané do jednoho inteligentního celku s maximálním komfortem a ekonomickým provozem.\n\nBudova má dvě funkčně odlišné zóny: suterén (1PP) sloužící jako zázemí pro zaměstnance a dělníky – šatny, klidové místnosti – druhé a třetí nadzemní podlaží se školicím střediskem a restaurací, kde se střídají různé typy provozu a akcí.",
+      "image": "/images/uploads/WhatsApp Image 2026-11-12 at 20.18.05.jpeg",
+      "zadani": "Sofistikovaný projekt administrativní budovy pro náročného investora s vysokými požadavky na estetiku i funkčnost interiéru i exteriéru. Budova je výrazně prosklená, což ji činí mimořádně náročnou na provoz – tepelné zisky v létě a tepelné ztráty v zimě kladou extrémní nároky na regulaci vytápění, chlazení a zastínění. Investor požadoval KNX systém, aby byl nezávislý na výběru koncových profilů v interiéru a aby vše ladilo s náčočným designem, pokrývající řízení osvětlení přes DALI, chlazení pomocí chlazených stropů, venkovní zastínění celé budovy a vytápění – vše provázané do jednoho inteligentního celku s maximálním komfortem a ekonomickým provozem.\n\nBudova má dvě funkčně odlišné zóny: suterén (1PP) sloužící jako zázemí pro zaměstnance a dělníky – šatny, klidové místnosti – druhé a třetí nadzemní podlaží se školicím střediskem a restaurací, kde se střídají různé typy provozu a akcí.",
+      "co_jsme_udelali": "Celou budovu řídíme kompletně přes systém KNX. Venkovní zastínění se ovládá automaticky podle světových stran a denní doby tak, aby budova co nejméně zatěžovala systém vytápění a chlazení – investor má samozřejmě kdykoli možnost ručního zásahu. Pro školicí středisko a restauraci jsme naprogramovali scény pro různé typy provozu: běžný pracovní den, školení, workshopy, večerní akce. Každá scéna nastaví osvětlení, zastínění i klimatizaci přesně tak, jak daná situace vyžaduje.\n\nSuterén funguje jako samostatná zóna s vlastní logikou – zázemí zaměstnanců, šatny a klidové místnosti mají svůj nezávislý provoz oddělený od reprezentativní části budovy.",
+      "gallery": [
+        "/images/uploads/WhatsApp Image 2026-11-12 at 20.16.29.jpeg",
+        "/images/uploads/WhatsApp Image 2026-11-12 at 20.16.28 (1).jpeg",
+        "/images/uploads/WhatsApp Image 2026-11-12 at 20.16.28 (2).jpeg",
+        "/images/uploads/WhatsApp Image 2026-11-12 at 20.16.28 (3).jpeg",
+        "/images/uploads/WhatsApp Image 2026-11-12 at 20.16.29 (1).jpeg"
+      ]
     }
   ]
 }
