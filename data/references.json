@@ -101,6 +101,22 @@
         "/images/uploads/nivy 1.jpg",
         "/images/uploads/nivy 2.jpg"
       ]
+    },
+    {
+      "title": "Výrobní hala ABB Robotics + Administrativní budova - Mošnov",
+      "featured": false,
+      "category": "Veřejná",
+      "service": "KNX",
+      "type": "Průmyslový objekt",
+      "date": "03/2023",
+      "city": "Mošnov",
+      "description": "Investor požadoval plně automatizované řízení osvětlení v rozsáhlé výrobní hale a přilehlé administrativní budově s důrazem na energetickou úspornost. Výrobní hala vyžadovala systém reagující na vnitřní i venkovní intenzitu světla a zároveň schopný obsluhovat více pracovních sektorů nezávisle na sobě – každý s vlastními světelnými specifikacemi. Sektory bez aktivního provozu se měly automaticky zhasínat, zatímco ostatní pokračovaly bez přerušení. V administrativní budově byl požadavek na řízení venkovního zastínění, osvětlení s lighting managementem a samozřejmostí bylo inteligentní ovládání vytápění a chlazení jednotlivých místností.",
+      "image": "/images/uploads/abb-robotics.webp",
+      "zadani": "Investor požadoval plně automatizované řízení osvětlení v rozsáhlé výrobní hale a přilehlé administrativní budově s důrazem na energetickou úspornost. Výrobní hala vyžadovala systém reagující na vnitřní i venkovní intenzitu světla a zároveň schopný obsluhovat více pracovních sektorů nezávisle na sobě – každý s vlastními světelnými specifikacemi. Sektory bez aktivního provozu se měly automaticky zhasínat, zatímco ostatní pokračovaly bez přerušení. V administrativní budově byl požadavek na řízení venkovního zastínění, osvětlení s lighting managementem a samozřejmostí bylo inteligentní ovládání vytápění a chlazení jednotlivých místností.",
+      "co_jsme_udelali": "Pro výrobní halu jsme navrhli a realizovali světelný a řídící systém DALI ovládající celkem 2 500 LED svítidel rozdělených do samostatných pracovních sektorů. Každý sektor reaguje na přítomnost obsluhy a aktuální světelné podmínky – systém sám rozhoduje, kde svítit a kde šetřit.\n\nV administrativní budově jsme implementovali ABB free@home s rozšířením KNX pro řízení venkovního zastínění, topení, chlazení a 300 LED svítidel - lightning managementu. Součástí dodávky bylo ovládání tepelného čerpadla a klimatizace s přímou návazností na fotovoltaiku. Celý provoz je průběžně monitorován tak, aby fotovoltaická výroba přispívala k energetické ekonomice objektu v maximální možné míře. Veškeré komponenty byly dodány od ABB.",
+      "gallery": [
+        "/images/uploads/mosnov-abb-robotics.webp"
+      ]
     }
   ]
 }
