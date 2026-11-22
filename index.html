@@ -483,6 +483,8 @@
       padding-right: var(--hero-pad);
       width: 100%;
       max-width: 100%;
+      position: relative;
+      z-index: 2;
     }
     .hero__content {
       position: relative;
@@ -515,7 +517,19 @@
       display: flex;
       gap: var(--s5);
       padding-top: var(--s4);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+    .hero__stats > div {
+      position: relative;
+      padding-top: 10px;
+    }
+    .hero__stats > div::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 28px; height: 2px;
+      background: var(--green);
+      border-radius: 2px;
     }
     .hero__stat-num {
       font-family: var(--f-display);
@@ -524,12 +538,13 @@
       color: var(--white);
       line-height: 1;
       letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.3);
     }
     .hero__stat-num--green { color: var(--green); }
     .hero__stat-lbl {
       font-size: 11.5px;
       font-weight: 600;
-      color: var(--muted);
+      color: rgba(255,255,255,0.62);
       margin-top: 6px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -1280,8 +1295,8 @@
             <input type="checkbox" name="botcheck" style="display:none;">
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="f-jmeno">Jméno</label>
-                <input type="text" id="f-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák">
+                <label class="form-label" for="f-jmeno">Jméno a příjmení *</label>
+                <input type="text" id="f-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák" required>
               </div>
               <div class="form-group">
                 <label class="form-label" for="f-telefon">Telefon *</label>
@@ -1536,8 +1551,29 @@
     // ── Formulář (Web3Forms) ───────────────────────
     function handleSubmit(e) {
       e.preventDefault();
-      const form = e.target;
-      const btn  = form.querySelector('.form-submit');
+      const form    = e.target;
+      const btn     = form.querySelector('.form-submit');
+      const jmeno   = form.querySelector('#f-jmeno');
+      const telefon = form.querySelector('#f-telefon');
+
+      // Reset
+      jmeno.setCustomValidity('');
+      telefon.setCustomValidity('');
+
+      // Jméno a příjmení — musí mít 2 slova
+      if (jmeno.value.trim().split(/\s+/).length < 2) {
+        jmeno.setCustomValidity('Zadejte jméno i příjmení (dvě slova)');
+        form.reportValidity();
+        return;
+      }
+
+      // Telefon — min. 9 číslic
+      const digits = telefon.value.replace(/\D/g, '');
+      if (digits.length < 9) {
+        telefon.setCustomValidity('Zadejte platné telefonní číslo (min. 9 číslic)');
+        form.reportValidity();
+        return;
+      }
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílám...';
       btn.disabled = true;
 
@@ -1714,7 +1750,7 @@
     <div style="background:#162236;border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
       <div style="width:64px;height:64px;border-radius:50%;background:rgba(106,180,42,0.15);border:2px solid #6ab42a;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px;color:#6ab42a;">✓</div>
       <h3 style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;">Poptávka odeslána!</h3>
-      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:32px;">Ozveme se vám co nejdříve.<br>Obvykle do 1 pracovního dne.</p>
+      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:32px;">Ozveme se vám co nejdříve.</p>
       <button onclick="document.getElementById('successPopup').style.display='none';" style="padding:13px 32px;border-radius:50px;background:#6ab42a;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;">Zavřít</button>
     </div>
   </div>
