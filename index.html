@@ -1549,9 +1549,14 @@
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          btn.innerHTML = '✓ Odesláno — ozveme se vám!';
-          btn.style.background = '#3a8a1a';
           form.reset();
+          btn.innerHTML = 'Odeslat poptávku';
+          btn.disabled = false;
+          const popup = document.getElementById('successPopup');
+          popup.style.display = 'flex';
+          popup.addEventListener('click', function(e) {
+            if (e.target === popup) popup.style.display = 'none';
+          }, { once: true });
         } else {
           throw new Error(data.message);
         }
@@ -1703,6 +1708,16 @@
       draw();
     })();
   </script>
+
+  <!-- Success popup -->
+  <div id="successPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#162236;border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(106,180,42,0.15);border:2px solid #6ab42a;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px;color:#6ab42a;">✓</div>
+      <h3 style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;">Poptávka odeslána!</h3>
+      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:32px;">Ozveme se vám co nejdříve.<br>Obvykle do 1 pracovního dne.</p>
+      <button onclick="document.getElementById('successPopup').style.display='none';" style="padding:13px 32px;border-radius:50px;background:#6ab42a;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;">Zavřít</button>
+    </div>
+  </div>
 
   <!-- Cookie informační banner -->
   <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#162236;border-top:1px solid rgba(255,255,255,0.09);padding:18px 24px;flex-direction:column;align-items:center;text-align:center;gap:12px;box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
