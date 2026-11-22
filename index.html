@@ -568,20 +568,73 @@
     /* ================================================
        SEKCE: NAŠE SLUŽBY
     ================================================ */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--s2);
+    .services-carousel-wrap {
+      position: relative;
     }
-    @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px)  { .services-grid { grid-template-columns: 1fr; } }
+    .services-grid {
+      display: flex;
+      gap: var(--s2);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .services-grid::-webkit-scrollbar { display: none; }
+
+    /* Dots */
+    .srv-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .srv-dot {
+      width: 8px; height: 8px;
+      border-radius: 4px;
+      background: rgba(26,35,50,0.25);
+      cursor: pointer;
+      transition: width 0.3s ease, background 0.3s ease;
+      border: none;
+    }
+    .srv-dot.active {
+      width: 24px;
+      background: var(--green-dark);
+    }
+
+    /* Nav arrows */
+    .srv-nav {
+      display: none; /* hidden on mobile */
+      position: absolute;
+      top: 50%;
+      transform: translateY(calc(-50% - 10px));
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--dark-2);
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.1);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    @media (min-width: 700px) { .srv-nav { display: flex; } }
+    .srv-nav:hover { background: var(--green); border-color: var(--green); }
+    .srv-nav.disabled { opacity: 0.25; pointer-events: none; }
+    .srv-nav--prev { left: -22px; }
+    .srv-nav--next { right: -22px; }
 
     .srv-card {
+      flex: 0 0 calc(24% - 10px);
+      scroll-snap-align: start;
       position: relative;
       height: 390px;
       border-radius: var(--radius-lg);
       overflow: hidden;
     }
+    @media (max-width: 1024px) { .srv-card { flex: 0 0 calc(50% - 8px); } }
+    @media (max-width: 560px)  { .srv-card { flex: 0 0 82%; } }
     .srv-card__bg {
       position: absolute; inset: 0;
       background-size: cover;
@@ -1073,7 +1126,10 @@
         <span class="label" style="color: var(--green-dark);">Co děláme</span>
         <h2 class="heading" style="color: #1a2332;">Naše služby</h2>
       </div>
-      <div class="services-grid">
+      <div class="services-carousel-wrap">
+        <button class="srv-nav srv-nav--prev disabled" id="srvPrev" aria-label="Předchozí"><i class="fas fa-chevron-left"></i></button>
+        <button class="srv-nav srv-nav--next" id="srvNext" aria-label="Další"><i class="fas fa-chevron-right"></i></button>
+        <div class="services-grid" id="srvGrid">
 
         <div class="srv-card reveal reveal-delay-1" id="knx">
           <div class="srv-card__bg" style="background-image:url('/images/knx-panel.jpg'); background-size:300%; background-position:8% 45%;"></div>
@@ -1125,7 +1181,9 @@
           </div>
         </div>
 
-      </div>
+        </div><!-- /services-grid -->
+        <div class="srv-dots" id="srvDots"></div>
+      </div><!-- /services-carousel-wrap -->
     </div>
   </section>
 
@@ -1560,6 +1618,66 @@
         btn.disabled = false;
       });
     }
+  </script>
+
+  <!-- Services carousel -->
+  <script>
+    (function() {
+      const grid = document.getElementById('srvGrid');
+      const prevBtn = document.getElementById('srvPrev');
+      const nextBtn = document.getElementById('srvNext');
+      const dotsWrap = document.getElementById('srvDots');
+      if (!grid) return;
+
+      const cards = Array.from(grid.querySelectorAll('.srv-card'));
+
+      // Build dots
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'srv-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Přejít na kartu ' + (i + 1));
+        dot.addEventListener('click', () => scrollToCard(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      function scrollToCard(i) {
+        const card = cards[i];
+        grid.scrollTo({ left: card.offsetLeft - grid.offsetLeft, behavior: 'smooth' });
+      }
+
+      function getActiveIndex() {
+        let best = 0, minDist = Infinity;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(grid.scrollLeft - (card.offsetLeft - grid.offsetLeft));
+          if (dist < minDist) { minDist = dist; best = i; }
+        });
+        return best;
+      }
+
+      function updateNav() {
+        const atStart = grid.scrollLeft < 8;
+        const atEnd   = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 8;
+        prevBtn.classList.toggle('disabled', atStart);
+        nextBtn.classList.toggle('disabled', atEnd);
+
+        const active = getActiveIndex();
+        dotsWrap.querySelectorAll('.srv-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === active);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => {
+        const active = getActiveIndex();
+        scrollToCard(Math.max(0, active - 1));
+      });
+      nextBtn.addEventListener('click', () => {
+        const active = getActiveIndex();
+        scrollToCard(Math.min(cards.length - 1, active + 1));
+      });
+
+      grid.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    })();
   </script>
 
   <!-- Counter animace pro hero statistiky -->
