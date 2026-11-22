@@ -318,8 +318,11 @@
       <!-- Filtry -->
       <div class="filters reveal">
         <button class="filter-btn active" data-filter="vse">Vše</button>
-        <button class="filter-btn" data-filter="Soukromá">Soukromé zakázky</button>
-        <button class="filter-btn" data-filter="Veřejná">Veřejné zakázky</button>
+        <button class="filter-btn" data-filter="KNX"><i class="fas fa-microchip" style="font-size:11px;margin-right:3px;"></i> KNX</button>
+        <button class="filter-btn" data-filter="DALI"><i class="fas fa-lightbulb" style="font-size:11px;margin-right:3px;"></i> DALI</button>
+        <button class="filter-btn" data-filter="MaR"><i class="fas fa-sliders-h" style="font-size:11px;margin-right:3px;"></i> MaR</button>
+        <button class="filter-btn" data-filter="Silnoproud"><i class="fas fa-bolt" style="font-size:11px;margin-right:3px;"></i> Silnoproud</button>
+        <button class="filter-btn" data-filter="Slaboproud"><i class="fas fa-network-wired" style="font-size:11px;margin-right:3px;"></i> Slaboproud</button>
       </div>
 
       <!-- Karty – generuje JavaScript z data/references.json -->
@@ -350,6 +353,7 @@
   <script>
     const SERVICE_ICONS = {
       'KNX':        'fa-microchip',
+      'DALI':       'fa-lightbulb',
       'Silnoproud': 'fa-bolt',
       'Slaboproud': 'fa-network-wired',
       'MaR':        'fa-sliders-h'
@@ -373,26 +377,28 @@
       });
     }, { threshold: 0.08 });
 
-    function initFilters() {
+    function applyFilter(filter) {
       const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+
       const emptyState = document.getElementById('emptyState');
       const totalCount = document.getElementById('totalCount');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const filter = btn.dataset.filter;
-          let visible = 0;
-          document.querySelectorAll('.ref-card').forEach(card => {
-            const match = filter === 'vse' || card.dataset.category === filter;
-            card.style.display = match ? '' : 'none';
-            if (match) visible++;
-          });
-          totalCount.textContent = visible;
-          emptyState.style.display = visible === 0 ? 'block' : 'none';
-        });
+      let visible = 0;
+      document.querySelectorAll('.ref-card').forEach(card => {
+        const services = (card.dataset.services || '').split(',');
+        const match = filter === 'vse' || services.includes(filter);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
       });
+      totalCount.textContent = visible;
+      emptyState.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    function initFilters(preFilter) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      });
+      if (preFilter) applyFilter(preFilter);
     }
 
     async function loadReferences() {
@@ -400,21 +406,31 @@
       const emptyState = document.getElementById('emptyState');
       const totalCount = document.getElementById('totalCount');
 
+      // URL param pro pre-filtrování z podstránek (např. reference.html?service=KNX)
+      const preFilter = new URLSearchParams(window.location.search).get('service') || null;
+
       try {
         const res  = await fetch('/data/references.json');
         const data = await res.json();
         const refs = (data.references || []).sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
         refs.forEach(ref => {
-          const icon    = SERVICE_ICONS[ref.service] || 'fa-bolt';
+          // service může být string (starý záznam) nebo array (nový)
+          const services = Array.isArray(ref.service)
+            ? ref.service
+            : [ref.service].filter(Boolean);
+          const icon    = SERVICE_ICONS[services[0]] || 'fa-bolt';
           const slug    = generateSlug(ref.title);
           const imgHtml = ref.image
             ? `<img class="ref-card__img" src="${ref.image}" alt="${ref.title}">`
             : `<div class="ref-card__img-placeholder"><i class="fas ${icon}"></i></div>`;
+          const serviceTags = services.map(s =>
+            `<span class="tag tag--service"><i class="fas ${SERVICE_ICONS[s] || 'fa-bolt'}" style="font-size:10px;"></i> ${s}</span>`
+          ).join('');
 
           const article = document.createElement('article');
           article.className = 'ref-card reveal';
-          article.dataset.category = ref.category;
+          article.dataset.services = services.join(',');
           article.style.cursor = 'pointer';
           article.addEventListener('click', () => {
             window.location.href = `reference-detail.html?slug=${slug}`;
@@ -423,7 +439,7 @@
             ${imgHtml}
             <div class="ref-card__body">
               <div class="ref-card__meta">
-                <span class="tag tag--service">${ref.category} zakázka</span>
+                ${serviceTags}
                 <span class="tag tag--type">${ref.type}</span>
                 <span class="ref-card__date">${ref.date}</span>
               </div>
@@ -448,7 +464,7 @@
       }
 
       document.querySelectorAll('.reveal:not(.ref-card)').forEach(el => revealObserver.observe(el));
-      initFilters();
+      initFilters(preFilter);
     }
 
     loadReferences();

@@ -248,6 +248,7 @@
 
     const SERVICE_ICONS = {
       'KNX':        'fa-microchip',
+      'DALI':       'fa-lightbulb',
       'Silnoproud': 'fa-bolt',
       'Slaboproud': 'fa-network-wired',
       'MaR':        'fa-sliders-h'
@@ -278,11 +279,16 @@
         document.title = ref.title + ' | H&B Elektrosystem';
 
         // Hero image
+        // service může být string nebo array
+        const services = Array.isArray(ref.service)
+          ? ref.service
+          : [ref.service].filter(Boolean);
+        const firstIcon = SERVICE_ICONS[services[0]] || 'fa-bolt';
+
         if (ref.image) {
           heroWrap.innerHTML = `<img class="hero-img" src="${ref.image}" alt="${ref.title}">`;
         } else {
-          const icon = SERVICE_ICONS[ref.service] || 'fa-bolt';
-          heroWrap.innerHTML = `<div class="hero-placeholder"><i class="fas ${icon}"></i></div>`;
+          heroWrap.innerHTML = `<div class="hero-placeholder"><i class="fas ${firstIcon}"></i></div>`;
         }
 
         // Gallery section
@@ -302,7 +308,7 @@
 
           <div class="tags">
             <span class="tag tag--category">${ref.category} zakázka</span>
-            <span class="tag tag--info"><i class="fas ${SERVICE_ICONS[ref.service] || 'fa-bolt'}" style="font-size:11px;"></i> ${ref.service}</span>
+            ${services.map(s => `<span class="tag tag--info"><i class="fas ${SERVICE_ICONS[s] || 'fa-bolt'}" style="font-size:11px;"></i> ${s}</span>`).join('')}
             <span class="tag tag--info">${ref.type}</span>
             <span class="tag tag--info"><i class="fas fa-map-marker-alt" style="font-size:11px;"></i> ${ref.city}</span>
             <span class="tag tag--info">${ref.date}</span>
