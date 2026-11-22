@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /data/
+Disallow: /images/uploads/
+
+Sitemap: https://www.hbelektrosystem.cz/sitemap.xml
