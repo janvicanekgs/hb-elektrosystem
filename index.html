@@ -445,7 +445,6 @@
       align-items: center;
       overflow: hidden;
     }
-    /* Spodek hero sekce plynule přechází do tmavé — napojí se na klín Služeb */
     .hero::after {
       content: '';
       position: absolute;
@@ -456,7 +455,6 @@
       pointer-events: none;
     }
 
-    /* Slider: více vrstev, aktivní má opacity 1 */
     @keyframes kenburns {
       from { transform: scale(1.06); }
       to   { transform: scale(1.00); }
@@ -465,36 +463,8 @@
       position: absolute; inset: 0;
       background-size: cover;
       background-position: center;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-    }
-    .hero__slide.active {
       opacity: 1;
-      animation: kenburns 8s ease-out forwards;
-    }
-
-    /* Tečky navigace */
-    .hero__dots {
-      position: absolute;
-      bottom: var(--s3);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      display: flex;
-      gap: 8px;
-    }
-    .hero__dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      padding: 0;
-    }
-    .hero__dot.active {
-      background: var(--green);
-      transform: scale(1.25);
+      animation: kenburns 14s ease-out forwards;
     }
 
     .hero__overlay {
@@ -507,7 +477,6 @@
       );
       z-index: 1;
     }
-    /* Hero ignoruje globální container — má vlastní padding od kraje */
     .hero > .container {
       padding-left: var(--hero-pad);
       padding-right: var(--hero-pad);
@@ -1074,17 +1043,11 @@
        HERO
   ================================================ -->
   <section class="hero">
-    <!-- Slider fotky -->
-    <div class="hero__slide active" style="background-image:url('https://static.wixstatic.com/media/8a50fe_b178e4727a0c443d9aca3bbcce6af9e6~mv2.jpg'); background-position: center right;"></div>
-    <div class="hero__slide" style="background-image:url('https://static.wixstatic.com/media/11062b_bb79545dc3824f2bb55560cc1ff0ef60~mv2.jpg')"></div>
-    <div class="hero__slide" style="background-image:url('https://static.wixstatic.com/media/11062b_2754ce5e6b154f00b5f602df5f258807~mv2.jpg')"></div>
-    <div class="hero__slide" style="background-image:url('https://static.wixstatic.com/media/11062b_a196769bf1bc419bba88f9ffaa768614~mv2.jpg')"></div>
+    <!-- Hero fotka – jedna fixní -->
+    <div class="hero__slide" style="background-image:url('/images/hero.jpg'); background-position: center;"></div>
     <div class="hero__overlay"></div>
     <div class="container">
-      <!-- Tečky -->
-    <div class="hero__dots" id="heroDots"></div>
-
-    <div class="hero__content reveal">
+      <div class="hero__content reveal">
         <h1 class="hero__title">
           Elektroinstalace<br>
           pro moderní<br>
@@ -1097,7 +1060,7 @@
         </p>
         <div class="hero__actions">
           <a href="kontakt.html" class="btn btn-primary">Nezávazná poptávka</a>
-          <a href="#reference" class="btn btn-outline">Naše reference</a>
+          <a href="reference.html" class="btn btn-outline">Naše realizace</a>
         </div>
         <div class="hero__stats" id="heroStats">
           <div>
@@ -1553,26 +1516,6 @@
         }).join('');
 
         initGalleryCarousel();
-
-        // ── Dynamické hero slidy z featured referencí ──
-        const heroWithImages = refs.filter(r => r.featured && r.image);
-        if (heroWithImages.length > 0) {
-          const heroSection = document.querySelector('.hero');
-          const heroOverlay = heroSection?.querySelector('.hero__overlay');
-          if (heroSection && heroOverlay) {
-            // Odstraň statické slidy
-            heroSection.querySelectorAll('.hero__slide').forEach(s => s.remove());
-            // Vytvoř nové z referencí
-            heroWithImages.forEach(ref => {
-              const slide = document.createElement('div');
-              slide.className = 'hero__slide';
-              slide.style.backgroundImage = `url('${ref.image}')`;
-              slide.style.backgroundPosition = 'center';
-              heroSection.insertBefore(slide, heroOverlay);
-            });
-            initHeroSlider();
-          }
-        }
 
       } catch (e) {
         console.warn('Gallery load failed:', e);
