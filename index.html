@@ -1547,6 +1547,10 @@
       });
     });
 
+    // ── Formulář – vymaž custom error při psaní ───
+    document.getElementById('f-jmeno').addEventListener('input', function() { this.setCustomValidity(''); });
+    document.getElementById('f-telefon').addEventListener('input', function() { this.setCustomValidity(''); });
+
     // ── Formulář (Web3Forms) ───────────────────────
     function handleSubmit(e) {
       e.preventDefault();

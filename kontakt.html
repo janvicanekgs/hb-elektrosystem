@@ -597,6 +597,10 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+    // Vymaž custom error při psaní
+    document.getElementById('k-jmeno').addEventListener('input', function() { this.setCustomValidity(''); });
+    document.getElementById('k-telefon').addEventListener('input', function() { this.setCustomValidity(''); });
+
     // Formulář (Web3Forms)
     function handleSubmit(e) {
       e.preventDefault();
