@@ -24,7 +24,6 @@ collections:
             summary: "{{fields.title}} – {{fields.city}} ({{fields.category}})"
             fields:
               - { name: "title", label: "Název projektu", widget: "string" }
-              - { name: "featured", label: "⭐ Zobrazit na úvodní stránce", widget: "boolean", default: false, hint: "Zaškrtněte pro zobrazení v sekci Vybrané realizace na hlavní stránce" }
               - name: "category"
                 label: "Kategorie zakázky"
                 widget: "select"
@@ -34,11 +33,13 @@ collections:
               - name: "service"
                 label: "Typ služby"
                 widget: "select"
+                multiple: true
                 options:
                   - { label: "KNX / Chytré domy", value: "KNX" }
                   - { label: "Silnoproud", value: "Silnoproud" }
                   - { label: "Slaboproud", value: "Slaboproud" }
                   - { label: "MaR", value: "MaR" }
+                  - { label: "Řízení osvětlení DALI", value: "DALI" }
               - { name: "type", label: "Typ objektu", widget: "string", hint: "Např.: Rodinný dům, Bytový dům, Komerční objekt, Vila, Průmyslový objekt" }
               - { name: "date", label: "Datum realizace", widget: "string", hint: "Formát: MM / YYYY (např. 03 / 2025)" }
               - { name: "city", label: "Město", widget: "string" }
