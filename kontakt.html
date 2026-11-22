@@ -516,8 +516,8 @@
             <input type="checkbox" name="botcheck" style="display:none;">
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="k-jmeno">Jméno</label>
-                <input type="text" id="k-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák">
+                <label class="form-label" for="k-jmeno">Jméno a příjmení *</label>
+                <input type="text" id="k-jmeno" name="jmeno" class="form-input" placeholder="Jan Novák" required>
               </div>
               <div class="form-group">
                 <label class="form-label" for="k-telefon">Telefon *</label>
@@ -566,6 +566,16 @@
     </div>
   </footer>
 
+  <!-- Success popup -->
+  <div id="successPopup" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#162236;border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:48px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(106,180,42,0.15);border:2px solid #6ab42a;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px;color:#6ab42a;">✓</div>
+      <h3 style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;">Poptávka odeslána!</h3>
+      <p style="font-size:14px;color:#8a9baa;margin-bottom:28px;">Ozveme se vám co nejdříve.</p>
+      <button onclick="document.getElementById('successPopup').style.display='none';" style="background:#6ab42a;color:#fff;padding:12px 32px;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;">Zavřít</button>
+    </div>
+  </div>
+
   <!-- Cookie banner -->
   <div id="cookieBanner">
     <p>Tento web používá Google Fonts pro zobrazení písem. Žádné analytické ani marketingové cookies nepoužíváme. <a href="privacy.html">Více informací</a></p>
@@ -590,8 +600,27 @@
     // Formulář (Web3Forms)
     function handleSubmit(e) {
       e.preventDefault();
-      const form = e.target;
-      const btn  = form.querySelector('.form-submit');
+      const form    = e.target;
+      const btn     = form.querySelector('.form-submit');
+      const jmeno   = form.querySelector('#k-jmeno');
+      const telefon = form.querySelector('#k-telefon');
+
+      jmeno.setCustomValidity('');
+      telefon.setCustomValidity('');
+
+      if (jmeno.value.trim().split(/\s+/).length < 2) {
+        jmeno.setCustomValidity('Zadejte jméno i příjmení (dvě slova)');
+        form.reportValidity();
+        return;
+      }
+
+      const digits = telefon.value.replace(/\D/g, '');
+      if (digits.length < 9) {
+        telefon.setCustomValidity('Zadejte platné telefonní číslo (min. 9 číslic)');
+        form.reportValidity();
+        return;
+      }
+
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílám...';
       btn.disabled = true;
 
@@ -603,9 +632,14 @@
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          btn.innerHTML = '✓ Odesláno — ozveme se vám!';
-          btn.style.background = '#3a8a1a';
           form.reset();
+          btn.innerHTML = 'Odeslat poptávku';
+          btn.disabled = false;
+          const popup = document.getElementById('successPopup');
+          popup.style.display = 'flex';
+          popup.addEventListener('click', function(ev) {
+            if (ev.target === popup) popup.style.display = 'none';
+          }, { once: true });
         } else {
           throw new Error(data.message);
         }
