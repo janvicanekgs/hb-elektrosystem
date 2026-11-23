@@ -152,17 +152,6 @@
     .footer__links{display:flex;gap:var(--s3);justify-content:center;margin-bottom:var(--s3);flex-wrap:wrap;}
     .footer__link{font-size:13px;color:var(--muted);transition:var(--transition);}
     .footer__link:hover{color:var(--green);}
-    .switch-cta{display:inline-block;text-decoration:none;perspective:500px;vertical-align:middle;}
-    .switch-plate{background:var(--dark-2);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 10px 14px;box-shadow:inset 0 2px 6px rgba(0,0,0,0.5),0 10px 24px rgba(0,0,0,0.3);width:170px;transition:box-shadow 0.2s,border-color 0.2s;}
-    .switch-rocker{border-radius:6px;overflow:hidden;transform-style:preserve-3d;transform-origin:center 60%;transition:transform 0.08s ease;cursor:pointer;}
-    .switch-top{background:var(--dark-3);padding:14px 12px 10px;text-align:center;border-bottom:2px solid rgba(0,0,0,0.4);box-shadow:inset 0 2px 4px rgba(255,255,255,0.03);}
-    .switch-dot{display:block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(106,180,42,0.9);margin:0 auto 10px;transition:all 0.2s;}
-    .switch-text{font-family:var(--f-body);font-size:11px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;display:block;line-height:1.5;}
-    .switch-bottom{background:var(--dark);padding:9px 12px;text-align:center;box-shadow:inset 0 -2px 4px rgba(0,0,0,0.4);}
-    .switch-hint{font-family:var(--f-body);font-size:9px;font-weight:600;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;}
-    .switch-rocker.pressing{transform:rotateX(22deg);}
-    .switch-rocker.pressing .switch-dot{background:rgba(106,180,42,0.2);box-shadow:none;}
-    .switch-plate.lit{box-shadow:inset 0 2px 6px rgba(0,0,0,0.5),0 0 28px rgba(106,180,42,0.2),0 10px 24px rgba(0,0,0,0.3);border-color:rgba(106,180,42,0.3);}
   </style>
 </head>
 <body>
@@ -342,7 +331,7 @@
         <h2>Potřebujete MaR systém?</h2>
         <p>Ozvěte se nám – zdarma zhodnotíme vaše požadavky a navrhneme optimální řešení.</p>
         <div class="cta-box__btns">
-          <a href="kontakt.html" class="switch-cta" data-switch><div class="switch-plate"><div class="switch-rocker"><div class="switch-top"><span class="switch-dot"></span><span class="switch-text">Nezávazná<br>poptávka</span></div><div class="switch-bottom"><span class="switch-hint">↑ stiskni</span></div></div></div></a>
+          <a href="kontakt.html" class="btn btn-primary">Nezávazná poptávka</a>
           <a href="tel:+420737533252" class="btn btn-outline"><i class="fas fa-phone"></i> +420 737 533 252</a>
         </div>
       </div>
@@ -369,9 +358,6 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    document.querySelectorAll('[data-switch]').forEach(sw => {
-      const rocker = sw.querySelector('.switch-rocker'), plate = sw.querySelector('.switch-plate'), href = sw.getAttribute('href');
-      sw.addEventListener('mousedown', e => { e.preventDefault(); rocker.classList.add('pressing'); });
       sw.addEventListener('touchstart', () => rocker.classList.add('pressing'), { passive: true });
       const release = e => { e.preventDefault(); setTimeout(() => { rocker.classList.remove('pressing'); plate.classList.add('lit'); setTimeout(() => { window.location.href = href; }, 280); }, 100); };
       sw.addEventListener('mouseup', release); sw.addEventListener('touchend', release);
