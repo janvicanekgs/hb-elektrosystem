@@ -358,12 +358,7 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-      sw.addEventListener('touchstart', () => rocker.classList.add('pressing'), { passive: true });
-      const release = e => { e.preventDefault(); setTimeout(() => { rocker.classList.remove('pressing'); plate.classList.add('lit'); setTimeout(() => { window.location.href = href; }, 280); }, 100); };
-      sw.addEventListener('mouseup', release); sw.addEventListener('touchend', release);
-      sw.addEventListener('mouseleave', () => rocker.classList.remove('pressing'));
-      sw.addEventListener('click', e => e.preventDefault());
-    });
+  
   </script>
 
 </body>
